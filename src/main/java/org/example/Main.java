@@ -18,6 +18,8 @@ public class Main {
         Marek.polewidzenia = 5;
 
         //nbudfskk fyahsodnvrhaskidlrva
+        //fasdatgfsdretdfs
+
 
         //implementacja pieniądza
         money kasa  = new money();
