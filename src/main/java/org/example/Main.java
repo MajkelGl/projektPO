@@ -17,6 +17,7 @@ public class Main {
         Marek.ilosc_pieniedzy = 50;
         Marek.polewidzenia = 5;
 
+        //nbudfskk fyahsodnvrhaskidlrva
 
         //implementacja pieniądza
         money kasa  = new money();
