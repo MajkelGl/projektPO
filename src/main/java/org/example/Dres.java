@@ -5,7 +5,11 @@ import java.util.Random;
 import static java.lang.Math.abs;
 
 public class Dres extends zly{
-    private int polewidzenia = 3;
+    private int polewidzenia;
+
+    {
+        polewidzenia = 2;
+    }
 
     public int czy_moze_okrasc(int x, int y)
     {
