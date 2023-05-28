@@ -13,9 +13,12 @@ class MainCharacter extends obiekt {
     //funkcja ktora pokazuje czy widzi klucz MC i uzaleznia czy idzie w strone klucza czy nie
     public int czy_widzi_klucz(int x, int y) {
         if (abs(pozycjax - x) <= polewidzenia && abs(pozycjay - y) <= polewidzenia)
-            wstrone(x,y);
+            return 1;
+        else
+            return 0;
+    }
 
-        //sprawdzenie czy Mc stoi na kluczu
+    public int czy_moze_podniesc_klucz(int x, int y){
         if(pozycjax == x && pozycjay == y)
             return 1;
         else
