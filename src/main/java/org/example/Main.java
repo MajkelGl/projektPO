@@ -171,6 +171,7 @@ public class Main {
                 else
                     policjant.poruszaniesie(rozmiar);
                 //porusza sie
+            // huh
         }
 
 
