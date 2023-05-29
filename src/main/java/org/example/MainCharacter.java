@@ -4,6 +4,7 @@ import static java.lang.Math.abs;
 
 class MainCharacter extends obiekt implements Pozycja{
     //ilosc pieniedzy
+    //test
     public int ilosc_pieniedzy;
     //na ile widzi
     int polewidzenia;
