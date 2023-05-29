@@ -5,6 +5,72 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+
+    // Tablica stringow potrzebna do wizualizacji
+    static String[][] Pozycje = new String[25][25];
+
+
+    // Kolorki :}
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+
+    // Metoda resetujaca wyglad tablicy wizualizacyjnej
+    public static void Reset(int rozmiar)
+    {
+        for( int i = 0; i < rozmiar; i++)
+        {
+            for( int j = 0; j < rozmiar; j++)
+            {
+                Pozycje[i][j] = "#";
+            }
+        }
+    }
+
+
+    //Metoda, ktora dodaje obiekty do tablicy wizualizacyjnej
+    public static void Dodawanie(int typ, int miejscex, int miejscey) {
+        switch (typ) {
+            case 1:
+                Pozycje[miejscex][miejscey] = ANSI_PURPLE + "Y" + ANSI_RESET;
+                break;
+            case 2:
+                Pozycje[miejscex][miejscey] = ANSI_RED + "D" + ANSI_RESET;
+                break;
+            case 3:
+                Pozycje[miejscex][miejscey] = ANSI_YELLOW + "M" + ANSI_RESET;
+                break;
+            case 4:
+                Pozycje[miejscex][miejscey] = ANSI_BLUE + "P" + ANSI_RESET;
+                break;
+            case 5:
+                Pozycje[miejscex][miejscey] = ANSI_GREEN + "F" + ANSI_RESET;
+                break;
+            case 6:
+                Pozycje[miejscex][miejscey] = ANSI_CYAN + "K" + ANSI_RESET;
+                break;
+
+        }
+
+    }
+
+
+    // metoda wyswietlajaca tablice wizualizacyjna
+    public static void WyswietlanieTablicy(int rozmiar)
+    {
+        for( int i = 0; i < rozmiar; i++)
+        {
+            for( int j = 0; j < rozmiar; j++)
+            {
+                System.out.print(Pozycje[i][j]);
+            }
+            System.out.println();
+        }
+    }
     public static void main(String[] args) {
         Random losowy = new Random();
         //inicjalizacja rozmiaru planszy
@@ -72,6 +138,12 @@ public class Main {
         //puszczenie losowania do kradzieży
         int kradziez;
 
+        //Jezeli parametr ten zostanie zmieniony to zostanie wyswietlony aktualny stan mapy
+        int akcja = 0;
+
+        //Jaki typ akcji został wykonany
+        String TypAkcji = " ";
+
         while (true) {
             iloscruchow++;
             // sprawdzenie czy MC widzi klucz,
@@ -80,6 +152,8 @@ public class Main {
             // a jak nie to porusza sie losowo
             if (Marek.czy_widzi_klucz(key.pozycjax, key.pozycjay) == 1) {
                 Marek.wstrone(key.pozycjax, key.pozycjay);
+                akcja++;
+                TypAkcji += "zauwazenie klucza";
                 if (Marek.czy_moze_podniesc_klucz(key.pozycjax, key.pozycjay) == 1) {
                     ktory = 1;
                     break;
@@ -89,15 +163,25 @@ public class Main {
             {
                 Marek.wstrone(kasa.pozycjax, kasa.pozycjay);
                 if (Marek.czy_podniesie_pieniadza(kasa.pozycjax, kasa.pozycjay) == 1) {
+                    akcja++;
+                    TypAkcji += "podniesienie pieniadza";
                     Marek.ilosc_pieniedzy += kasa.wartosc;
                     System.out.println("marek podnosi pieniadze   ->  " + kasa.wartosc);
                     kasa.wartosc = 0;
                 }
-            } else//jak marek nic nie widzi porusza sie losowo
+            }
+            else//jak marek nic nie widzi porusza sie losowo
+            {
                 Marek.poruszaniesie(rozmiar);
+            }
+            Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());//Dodanie do tablicy obiektu
+
+
             if(seba != null) {
                 if (seba.czy_moze_okrasc(Marek.pozycjax, Marek.pozycjay) == 1)//sprawdzenie czy dres moze okrasc MC
                 {
+                    akcja++;
+                    TypAkcji += "kradziez";
                     kradziez = losowy.nextInt(seba.max_pieniedzy - seba.min_pieniedzy + 1) + seba.min_pieniedzy;//losowanie z przedzialu liczby ile kradnie dres
                     Marek.ilosc_pieniedzy -= kradziez;//kradziez dresa
                     System.out.println("Dres ukradł -> " + kradziez + "     ruch   " + iloscruchow);
@@ -109,6 +193,8 @@ public class Main {
                     seba.czy_widzi_cos(Marek.pozycjax, Marek.pozycjay, rozmiar);//ruch dresa
                     if (seba.czy_moze_okrasc(Marek.pozycjax, Marek.pozycjay) == 1)//sprawdzenie czy dres moze okrasc
                     {
+                        akcja++;
+                        TypAkcji += "kradziez";
                         kradziez = losowy.nextInt(seba.max_pieniedzy - seba.min_pieniedzy + 1) + seba.min_pieniedzy;//losowanie z przedzialu liczby ile kradnie dres
                         Marek.ilosc_pieniedzy -= kradziez;//kradziez dresa
                         System.out.println("Dres ukradł -> " + kradziez + "     ruch   " + iloscruchow);
@@ -117,10 +203,14 @@ public class Main {
                             break;
                     }
                 }
+                Dodawanie(seba.GimmeType(), seba.Gimmex(), seba.Gimmey());//Dodanie do tablicy obiektu
             }
+
             if(Kuba != null) {
                 if (Kuba.czy_moze_okrasc(Marek.pozycjax, Marek.pozycjay, rozmiar) == 1)//ruch menela
                 {
+                    akcja++;
+                    TypAkcji += "kradziez";
                     kradziez = losowy.nextInt(Kuba.max_pieniedzy - Kuba.min_pieniedzy + 1) + Kuba.min_pieniedzy;//losowanie z przedzialu liczby ile kradnie menel
                     Marek.ilosc_pieniedzy -= kradziez;//kradziez menela
                     System.out.println("Menel ukradł -> " + kradziez + "     ruch   " + iloscruchow);
@@ -132,6 +222,8 @@ public class Main {
                     Kuba.poruszaniesie(rozmiar);
                     Kuba.przerwaodkradzenia--;
                     if (Kuba.czy_moze_okrasc(Marek.pozycjax, Marek.pozycjay, rozmiar) == 1) {
+                        akcja++;
+                        TypAkcji += "kradziez";
                         kradziez = losowy.nextInt(Kuba.max_pieniedzy - Kuba.min_pieniedzy + 1) + Kuba.min_pieniedzy;//losowanie z przedzialu liczby ile kradnie menel
                         Marek.ilosc_pieniedzy -= kradziez;//kradziez menela
                         System.out.println("Menel ukradł -> " + kradziez + "     ruch   " + iloscruchow);
@@ -140,38 +232,69 @@ public class Main {
                         Kuba.przerwaodkradzenia = 3;
                     }
                 }
+                Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
             }
             //aresztowanie jezeli wartosc dresa lub menela jest rozna od null to aresztuje
             if(seba != null && policjant.czy_moze_aresztowac(seba.pozycjax, seba.pozycjay) == 1) {
+                akcja++;
+                TypAkcji += "aresztowanie";
                 seba = null;
                 System.out.println("policjant aresztuje dresa");
                 //if(policjant.czy_widzi_dresa_lub_menela()
             }
             if (Kuba != null && policjant.czy_moze_aresztowac(Kuba.pozycjax, Kuba.pozycjay) == 1)
             {
+                akcja++;
+                TypAkcji += "aresztowanie";
                 Kuba = null;
                 System.out.println("policjant aresztuje menela");
             }
 
-                if (seba != null && policjant.czy_widzi_dresa_lub_menela(seba.pozycjax, seba.pozycjay) == 1){
+                if (seba != null && policjant.czy_widzi_dresa_lub_menela(seba.pozycjax, seba.pozycjay) == 1)
+                {
+                    akcja++;
+                    TypAkcji += "Poruszanie sie w strone zlego";
                     policjant.wstrone(seba.pozycjax, seba.pozycjay);
-                    if (policjant.czy_moze_aresztowac(seba.pozycjax, seba.pozycjay) == 1) {
+                    if (policjant.czy_moze_aresztowac(seba.pozycjax, seba.pozycjay) == 1)
+                    {
                         seba = null;
                         System.out.println("policjant aresztuje dresa");
                     }
                 }
-                else if(Kuba != null && policjant.czy_widzi_dresa_lub_menela(Kuba.pozycjax, Kuba.pozycjay) == 1) {
+                else if(Kuba != null && policjant.czy_widzi_dresa_lub_menela(Kuba.pozycjax, Kuba.pozycjay) == 1)
+                {
+                    akcja++;
+                    TypAkcji += "Poruszanie sie w strone zlego";
                     policjant.wstrone(Kuba.pozycjax, Kuba.pozycjay);
                 if (policjant.czy_moze_aresztowac(Kuba.pozycjax, Kuba.pozycjay) == 1)
                     {
+                        akcja++;
                         Kuba = null;
                         System.out.println("policjant aresztuje menela");
                     }
                 }
-                else
+                else {
                     policjant.poruszaniesie(rozmiar);
-                //porusza sie
-            // huh
+                }
+                Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+                Dodawanie(kasa.GimmeType(),kasa.Gimmex(), kasa.Gimmey());
+                Dodawanie(key.GimmeType(), key.Gimmex(), key.Gimmey());
+//                if( akcja > 0)
+//                {
+//                    System.out.println("Tura numer" + iloscruchow);
+//                    System.out.println("Typ akcji" + TypAkcji);
+//                    WyswietlanieTablicy(rozmiar);
+//                    System.out.println();
+//                    System.out.println();
+//                }
+            System.out.println("Tura numer" + iloscruchow);
+            System.out.println("Typ akcji" + TypAkcji);
+            WyswietlanieTablicy(rozmiar);
+            System.out.println();
+            System.out.println();
+                akcja = 0;
+                TypAkcji = "";
+                Reset(rozmiar);
         }
 
 

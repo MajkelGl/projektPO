@@ -4,7 +4,7 @@ import java.util.Random;
 
 import static java.lang.Math.abs;
 
-public class Dres extends zly{
+public class Dres extends zly implements Pozycja{
     private int polewidzenia;
 
     {
@@ -185,5 +185,22 @@ public class Dres extends zly{
             pozycjay++;
         else if(Y < 0)
             pozycjay--;
+    }
+    //Metoda zwracajaca pozycje x
+    public int Gimmex()
+    {
+        return pozycjax;
+    }
+
+    //Metoda zwracajaco pozycje y
+    public int Gimmey()
+    {
+        return pozycjay;
+    }
+
+    //Metoda zwracajaca typ obiektu
+    public int GimmeType()
+    {
+        return 2;
     }
 }

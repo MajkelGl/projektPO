@@ -4,7 +4,7 @@ import java.util.Random;
 
 import static java.lang.Math.abs;
 
-public class Menel extends zly{
+public class Menel extends zly implements Pozycja{
 
     public int czy_moze_okrasc(int x, int y,int rozmiar)
     {
@@ -144,5 +144,22 @@ public class Menel extends zly{
                 case 8 -> pozycjay--;
             }
         }
+    }
+    //Metoda zwracajaca pozycje x
+    public int Gimmex()
+    {
+        return pozycjax;
+    }
+
+    //Metoda zwracajaco pozycje y
+    public int Gimmey()
+    {
+        return pozycjay;
+    }
+
+    //Metoda zwracajaca typ obiektu
+    public int GimmeType()
+    {
+        return 3;
     }
 }
