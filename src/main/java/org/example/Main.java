@@ -9,8 +9,8 @@ public class Main {
         Random losowy = new Random();
         //inicjalizacja rozmiaru planszy
         System.out.println("rozmiar mapy -> 25");
-        Scanner scan = new Scanner(System.in);
-        int rozmiar = scan.nextInt();
+        //Scanner scan = new Scanner(System.in);
+        int rozmiar = 25;//scan.nextInt();
 
         //zaimplementowanie głównej postaci
         MainCharacter Marek = new MainCharacter();
