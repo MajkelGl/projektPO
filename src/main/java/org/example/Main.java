@@ -110,7 +110,7 @@ public class Main {
 
         //implementacja dresa
         Dres seba = new Dres();
-        seba.pozycjax = rozmiar - 1;
+        seba.pozycjax = rozmiar/2 - 1;
         seba.pozycjay = 0;
         seba.max_pieniedzy = 10;
         seba.min_pieniedzy = 5;
