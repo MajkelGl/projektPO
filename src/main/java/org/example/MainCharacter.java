@@ -44,133 +44,133 @@ class MainCharacter extends obiekt implements Pozycja{
     }
 
     //funkcja dzieki ktore postac sie bedzie poruszac losowo
-    public void poruszaniesie(int rozmiar) {
-        //System.out.println("ruch losowy");
-        Random rand = new Random();
-        int n;
-        if (pozycjax == 0) {
-            if (pozycjay == 0) {
-                n = rand.nextInt(3) + 1;
-                switch (n) {
-                    case 1 -> pozycjay++;
-                    case 2 -> {
-                        pozycjax++;
-                        pozycjay++;
-                    }
-                    case 3 -> pozycjax++;
-                }
-            } else if (pozycjay == rozmiar - 1) {
-                n = rand.nextInt(3) + 1;
-                switch (n) {
-                    case 1 -> pozycjax++;
-                    case 2 -> {
-                        pozycjax++;
-                        pozycjay--;
-                    }
-                    case 3 -> pozycjay--;
-                }
-            } else {
-                n = rand.nextInt(5) + 1;
-                switch (n) {
-                    case 1 -> pozycjay++;
-                    case 2 -> {
-                        pozycjax++;
-                        pozycjay++;
-                    }
-                    case 3 -> pozycjax++;
-                    case 4 -> {
-                        pozycjax++;
-                        pozycjay--;
-                    }
-                    case 5 -> pozycjay--;
-                }
-            }
-        } else if (pozycjax == rozmiar - 1) {
-            if (pozycjay == 0) {
-                n = rand.nextInt(3) + 1;
-                switch (n) {
-                    case 1 -> pozycjax--;
-                    case 2 -> {
-                        pozycjax--;
-                        pozycjay++;
-                    }
-                    case 3 -> pozycjay++;
-                }
-            } else if (pozycjay == rozmiar - 1) {
-                n = rand.nextInt(3) + 1;
-                switch (n) {
-                    case 1 -> pozycjay--;
-                    case 2 -> {
-                        pozycjax--;
-                        pozycjay--;
-                    }
-                    case 3 -> pozycjax--;
-                }
-            } else {
-                n = rand.nextInt(5) + 1;
-                switch (n) {
-                    case 1 -> pozycjay--;
-                    case 2 -> {
-                        pozycjax--;
-                        pozycjay--;
-                    }
-                    case 3 -> pozycjax++;
-                    case 4 -> {
-                        pozycjax--;
-                        pozycjay++;
-                    }
-                    case 5 -> pozycjay++;
-                }
-            }
-        } else if (pozycjay == 0) {
-            n = rand.nextInt(5) + 1;
-            switch (n) {
-                case 1 -> pozycjax--;
-                case 2 -> {
-                    pozycjax--;
-                    pozycjay++;
-                }
-                case 3 -> pozycjay++;
-                case 4 -> {
-                    pozycjax++;
-                    pozycjay++;
-                }
-                case 5 -> pozycjax++;
-            }
-        } else if (pozycjay == rozmiar - 1) {
-            n = rand.nextInt(5) + 1;
-            switch (n) {
-                case 1 -> pozycjax++;
-                case 2 -> {
-                    pozycjax++;
-                    pozycjay--;
-                }
-                case 3 -> pozycjay--;
-                case 4 -> {
-                    pozycjax--;
-                    pozycjay--;
-                }
-                case 5 -> pozycjax--;
-            }
-        }
-        else
-        {
-            n = rand.nextInt(8) + 1;
-            switch (n) {
-                case 1 -> {
-                    pozycjax--;
-                    pozycjay--;
-                }
-                case 2 -> pozycjax--;
-                case 3 -> {pozycjax--; pozycjay++;}
-                case 4 -> pozycjay++;
-                case 5 -> {pozycjax++; pozycjay++;}
-                case 6 -> pozycjax++;
-                case 7 -> {pozycjax++; pozycjay--;}
-                case 8 -> pozycjay--;
-            }
-        }
-    }
+//    public void poruszaniesie(int rozmiar) {
+//        //System.out.println("ruch losowy");
+//        Random rand = new Random();
+//        int n;
+//        if (pozycjax == 0) {
+//            if (pozycjay == 0) {
+//                n = rand.nextInt(3) + 1;
+//                switch (n) {
+//                    case 1 -> pozycjay++;
+//                    case 2 -> {
+//                        pozycjax++;
+//                        pozycjay++;
+//                    }
+//                    case 3 -> pozycjax++;
+//                }
+//            } else if (pozycjay == rozmiar - 1) {
+//                n = rand.nextInt(3) + 1;
+//                switch (n) {
+//                    case 1 -> pozycjax++;
+//                    case 2 -> {
+//                        pozycjax++;
+//                        pozycjay--;
+//                    }
+//                    case 3 -> pozycjay--;
+//                }
+//            } else {
+//                n = rand.nextInt(5) + 1;
+//                switch (n) {
+//                    case 1 -> pozycjay++;
+//                    case 2 -> {
+//                        pozycjax++;
+//                        pozycjay++;
+//                    }
+//                    case 3 -> pozycjax++;
+//                    case 4 -> {
+//                        pozycjax++;
+//                        pozycjay--;
+//                    }
+//                    case 5 -> pozycjay--;
+//                }
+//            }
+//        } else if (pozycjax == rozmiar - 1) {
+//            if (pozycjay == 0) {
+//                n = rand.nextInt(3) + 1;
+//                switch (n) {
+//                    case 1 -> pozycjax--;
+//                    case 2 -> {
+//                        pozycjax--;
+//                        pozycjay++;
+//                    }
+//                    case 3 -> pozycjay++;
+//                }
+//            } else if (pozycjay == rozmiar - 1) {
+//                n = rand.nextInt(3) + 1;
+//                switch (n) {
+//                    case 1 -> pozycjay--;
+//                    case 2 -> {
+//                        pozycjax--;
+//                        pozycjay--;
+//                    }
+//                    case 3 -> pozycjax--;
+//                }
+//            } else {
+//                n = rand.nextInt(5) + 1;
+//                switch (n) {
+//                    case 1 -> pozycjay--;
+//                    case 2 -> {
+//                        pozycjax--;
+//                        pozycjay--;
+//                    }
+//                    case 3 -> pozycjax++;
+//                    case 4 -> {
+//                        pozycjax--;
+//                        pozycjay++;
+//                    }
+//                    case 5 -> pozycjay++;
+//                }
+//            }
+//        } else if (pozycjay == 0) {
+//            n = rand.nextInt(5) + 1;
+//            switch (n) {
+//                case 1 -> pozycjax--;
+//                case 2 -> {
+//                    pozycjax--;
+//                    pozycjay++;
+//                }
+//                case 3 -> pozycjay++;
+//                case 4 -> {
+//                    pozycjax++;
+//                    pozycjay++;
+//                }
+//                case 5 -> pozycjax++;
+//            }
+//        } else if (pozycjay == rozmiar - 1) {
+//            n = rand.nextInt(5) + 1;
+//            switch (n) {
+//                case 1 -> pozycjax++;
+//                case 2 -> {
+//                    pozycjax++;
+//                    pozycjay--;
+//                }
+//                case 3 -> pozycjay--;
+//                case 4 -> {
+//                    pozycjax--;
+//                    pozycjay--;
+//                }
+//                case 5 -> pozycjax--;
+//            }
+//        }
+//        else
+//        {
+//            n = rand.nextInt(8) + 1;
+//            switch (n) {
+//                case 1 -> {
+//                    pozycjax--;
+//                    pozycjay--;
+//                }
+//                case 2 -> pozycjax--;
+//                case 3 -> {pozycjax--; pozycjay++;}
+//                case 4 -> pozycjay++;
+//                case 5 -> {pozycjax++; pozycjay++;}
+//                case 6 -> pozycjax++;
+//                case 7 -> {pozycjax++; pozycjay--;}
+//                case 8 -> pozycjay--;
+//            }
+//        }
+//    }
 
     //funkcja ktora pozwala MC kierowac sie w kierunku klucza
     public void wstrone(int x, int y)
