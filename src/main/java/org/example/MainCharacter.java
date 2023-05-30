@@ -2,8 +2,9 @@ package org.example;
 import java.util.Random;
 import static java.lang.Math.abs;
 
-class MainCharacter extends obiekt {
+class MainCharacter extends obiekt implements Pozycja{
     //ilosc pieniedzy
+    //test
     public int ilosc_pieniedzy;
     //na ile widzi
     int polewidzenia;
@@ -187,5 +188,23 @@ class MainCharacter extends obiekt {
             pozycjay++;
         else if(Y < 0)
             pozycjay--;
+    }
+
+    //Metoda zwracajaca pozycje x
+    public int Gimmex()
+    {
+        return pozycjax;
+    }
+
+    //Metoda zwracajaco pozycje y
+    public int Gimmey()
+    {
+        return pozycjay;
+    }
+
+    //Metoda zwracajaca typ obiektu
+    public int GimmeType()
+    {
+        return 1;
     }
 }
