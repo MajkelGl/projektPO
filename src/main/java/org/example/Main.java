@@ -172,7 +172,7 @@ public class Main {
             }
             else//jak marek nic nie widzi porusza sie losowo
             {
-                Marek.poruszaniesie(rozmiar);
+                Marek.PoruszanieSie(rozmiar);
             }
             Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());//Dodanie do tablicy obiektu
 
@@ -217,9 +217,9 @@ public class Main {
                     if (Marek.ilosc_pieniedzy <= 0)//sprawdzenie czy menel okradl na tyle ze jest koniec gry
                         break;
                     Kuba.przerwaodkradzenia = 3;
-                    Kuba.poruszaniesie(rozmiar);
+                    Kuba.PoruszanieSie(rozmiar);
                 } else {
-                    Kuba.poruszaniesie(rozmiar);
+                    Kuba.PoruszanieSie(rozmiar);
                     Kuba.przerwaodkradzenia--;
                     if (Kuba.czy_moze_okrasc(Marek.pozycjax, Marek.pozycjay, rozmiar) == 1) {
                         akcja++;
@@ -274,7 +274,7 @@ public class Main {
                     }
                 }
                 else {
-                    policjant.poruszaniesie(rozmiar);
+                    policjant.PoruszanieSie(rozmiar);
                 }
                 Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
                 Dodawanie(kasa.GimmeType(),kasa.Gimmex(), kasa.Gimmey());
