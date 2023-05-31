@@ -127,7 +127,7 @@ public class Main {
         policjant.pozycjay = 1;
         policjant.czy_moze_aresztowac(seba.pozycjax, seba.pozycjay);
         policjant.czy_widzi_dresa_lub_menela(seba.pozycjax, seba.pozycjay);
-        policjant.poruszaniesie(rozmiar);
+        policjant.PoruszanieSie(rozmiar);
 
         //element zliczający ile ruchów trwała gra
         int iloscruchow = 0;
