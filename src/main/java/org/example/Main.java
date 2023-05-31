@@ -273,6 +273,7 @@ public class Main {
                 {
                     akcja++;
                     TypAkcji += " Poruszanie sie w strone zlego ";
+                    //test??
                     policjant.wstrone(Kuba.pozycjax, Kuba.pozycjay);
                 if (policjant.czy_moze_aresztowac(Kuba.pozycjax, Kuba.pozycjay) == 1)
                     {
