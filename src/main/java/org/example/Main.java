@@ -79,24 +79,24 @@ public class Main {
         int rozmiar = 25;//scan.nextInt();
 
         //zaimplementowanie głównej postaci
-        MainCharacter Marek = new MainCharacter();
-        Marek.pozycjax = 1;
-        Marek.pozycjay = 1;
-        Marek.ilosc_pieniedzy = 50;
-        Marek.polewidzenia = 5;
+        MainCharacter Marek = new MainCharacter(1, 1, 50, 5);
+//        Marek.pozycjax = 1;
+//        Marek.pozycjay = 1;
+//        Marek.ilosc_pieniedzy = 50;
+//        Marek.polewidzenia = 5;
 
         //implementacja pieniądza
-        money kasa = new money();
-        kasa.pozycjax = 7;
-        kasa.pozycjay = 7;
-        kasa.wartosc = 50;
+        money kasa = new money(7,7,50);
+//        kasa.pozycjax = 7;
+//        kasa.pozycjay = 7;
+//        kasa.wartosc = 50;
 
         //implementacja menela
-        Menel Kuba = new Menel();
-        Kuba.pozycjax = 0;
-        Kuba.pozycjay = rozmiar - 1;
-        Kuba.max_pieniedzy = 5;
-        Kuba.min_pieniedzy = 1;
+          Menel Kuba = new Menel(0,rozmiar-1,5,1);
+//        Kuba.pozycjax = 0;
+//        Kuba.pozycjay = rozmiar - 1;
+//        Kuba.max_pieniedzy = 5;
+//        Kuba.min_pieniedzy = 1;
 
         //List<Menel> menele = new ArrayList<>();
 //        for(int i = 0; i < 5;i++)
@@ -109,25 +109,25 @@ public class Main {
 //        menele[1].pozycjax = 1;
 
         //implementacja dresa
-        Dres seba = new Dres();
-        seba.pozycjax = rozmiar - 1;
-        seba.pozycjay = 0;
-        seba.max_pieniedzy = 10;
-        seba.min_pieniedzy = 5;
-        seba.przerwaodkradzenia = 0;
+        Dres seba = new Dres(rozmiar-1,0,10,5,0);
+//        seba.pozycjax = rozmiar - 1;
+//        seba.pozycjay = 0;
+//        seba.max_pieniedzy = 10;
+//        seba.min_pieniedzy = 5;
+//        seba.przerwaodkradzenia = 0;
 
         //implementacja klucza
-        klucz key = new klucz();
-        key.pozycjax = rozmiar - 5;
-        key.pozycjay = rozmiar - 5;
+        klucz key = new klucz(rozmiar - 5, rozmiar -5 );
+//        key.pozycjax = rozmiar - 5;
+//        key.pozycjay = rozmiar - 5;
 
         //implementacja policjanta
-        Policjant policjant = new Policjant();
-        policjant.pozycjax = 1;
-        policjant.pozycjay = 1;
-        policjant.czy_moze_aresztowac(seba.pozycjax, seba.pozycjay);
-        policjant.czy_widzi_dresa_lub_menela(seba.pozycjax, seba.pozycjay);
-        policjant.PoruszanieSie(rozmiar);
+        Policjant policjant = new Policjant(1, 1, 2);
+//        policjant.pozycjax = 1;
+//        policjant.pozycjay = 1;
+//        policjant.czy_moze_aresztowac(seba.pozycjax, seba.pozycjay);
+//        policjant.czy_widzi_dresa_lub_menela(seba.pozycjax, seba.pozycjay);
+//        policjant.PoruszanieSie(rozmiar);
 
         //element zliczający ile ruchów trwała gra
         int iloscruchow = 0;
@@ -273,7 +273,6 @@ public class Main {
                 {
                     akcja++;
                     TypAkcji += " Poruszanie sie w strone zlego ";
-                    //test??
                     policjant.wstrone(Kuba.pozycjax, Kuba.pozycjay);
                 if (policjant.czy_moze_aresztowac(Kuba.pozycjax, Kuba.pozycjay) == 1)
                     {
@@ -285,8 +284,11 @@ public class Main {
                 else {
                     policjant.PoruszanieSie(rozmiar);
                 }
+                if( kasa.wartosc != 0)
+                {
+                    Dodawanie(kasa.GimmeType(),kasa.Gimmex(), kasa.Gimmey());
+                }
                 Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
-                Dodawanie(kasa.GimmeType(),kasa.Gimmex(), kasa.Gimmey());
                 Dodawanie(key.GimmeType(), key.Gimmex(), key.Gimmey());
                 if( akcja > 0)
                 {

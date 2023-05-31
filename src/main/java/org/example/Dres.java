@@ -5,6 +5,15 @@ import java.util.Random;
 import static java.lang.Math.abs;
 
 public class Dres extends zly implements Pozycja{
+
+    public Dres( int pozycjax, int pozycjay, int max_pieniedzy, int min_pieniedzy, int przerwaodkradzenia)
+    {
+        this.pozycjax = pozycjax;
+        this.pozycjay = pozycjay;
+        this.max_pieniedzy = max_pieniedzy;
+        this.min_pieniedzy = min_pieniedzy;
+        this.przerwaodkradzenia = przerwaodkradzenia;
+    }
     private int polewidzenia;
 
     {
