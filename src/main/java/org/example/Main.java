@@ -239,50 +239,6 @@ public class Main {
                 }
             }
 
-
-            //ruch policjanta
-            //najpierw sprawdzenie czy moze aresztowac kogos jak tak to aresztowanie
-//            if(Seba != null && Policjant.czy_moze_aresztowac(Seba.pozycja_x, Seba.pozycja_y) == 1)
-//            {
-//                akcja++;
-//                Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-//                if(Kuba != null)
-//                    Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
-//                Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
-//                if( kasa != null)
-//                    Dodawanie(kasa.GimmeType(),kasa.Gimmex(), kasa.Gimmey());
-//
-//                Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-//                Dodawanie(key.GimmeType(), key.Gimmex(), key.Gimmey());
-//                akcja++;
-//                System.out.println("przed aresztowaniem");
-//                WyswietlanieTablicy(rozmiar);
-//                Reset(rozmiar);
-//                Seba = null;
-//                TypAkcji += "\nAresztowanie Dresa";
-//                System.out.println("Policjant aresztuje dresa");
-//            }
-//            else if(Kuba != null && Policjant.czy_moze_aresztowac(Kuba.pozycja_x, Kuba.pozycja_y) == 1)
-//                {
-//                    akcja++;
-//                    Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-//                    Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
-//                    if(Seba != null)
-//                        Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
-//                    if( kasa != null)
-//                        Dodawanie(kasa.GimmeType(),kasa.Gimmex(), kasa.Gimmey());
-//
-//                    Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-//                    Dodawanie(key.GimmeType(), key.Gimmex(), key.Gimmey());
-//                    akcja++;
-//                    System.out.println("Przed aresztowaniem po ruchu policjanta");
-//                    WyswietlanieTablicy(rozmiar);
-//                    Reset(rozmiar);
-//                    Kuba = null;
-//                    TypAkcji += "\nAresztowanie Menela";
-//                    //System.out.println("Policjant aresztuje menela");
-//                }
-
             //pozniej po mozliwym aresztowaniu ruszanie sie policjanta
             if (Seba != null && Policjant.czy_widzi_dresa_lub_menela(Seba.pozycja_x, Seba.pozycja_y) == 1)
                 {
