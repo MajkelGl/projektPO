@@ -1,34 +1,32 @@
 package org.example;
 
-import java.util.Random;
-
 import static java.lang.Math.abs;
 
-public class Dres extends zly implements Pozycja{
+public class Dres extends Zly implements Pozycja{
 
-    public Dres( int pozycjax, int pozycjay, int max_pieniedzy, int min_pieniedzy, int przerwaodkradzenia)
+    public Dres( int pozycja_x, int pozycja_y, int max_pieniedzy, int min_pieniedzy, int przerwa_od_kradzenia)
     {
-        this.pozycjax = pozycjax;
-        this.pozycjay = pozycjay;
+        this.pozycja_x = pozycja_x;
+        this.pozycja_y = pozycja_y;
         this.max_pieniedzy = max_pieniedzy;
         this.min_pieniedzy = min_pieniedzy;
-        this.przerwaodkradzenia = przerwaodkradzenia;
+        this.przerwa_od_kradzenia = przerwa_od_kradzenia;
     }
-    private int polewidzenia;
+    private int pole_widzenia;
 
     {
-        polewidzenia = 2;
+        pole_widzenia = 2;
     }
 
     public int czy_moze_okrasc(int x, int y)
     {
-        if(przerwaodkradzenia != 0)
+        if(przerwa_od_kradzenia != 0)
         {
             return 0;
         }
         else
         {
-            if (abs(pozycjax - x) <= 1 && abs(pozycjay - y) <= 1) {
+            if (abs(pozycja_x - x) <= 1 && abs(pozycja_y - y) <= 1) {
                 return 1;
             } else
                 return 0;
@@ -36,176 +34,46 @@ public class Dres extends zly implements Pozycja{
     }
 
     public void czy_widzi_cos(int x, int y, int rozmiar) {
-        if(przerwaodkradzenia != 0)
+        if(przerwa_od_kradzenia != 0)
         {
-                PoruszanieSie(rozmiar);
-                przerwaodkradzenia--;
+                poruszanie_sie(rozmiar);
+                przerwa_od_kradzenia--;
         }
         else
         {
-            if (abs(pozycjax - x) <= polewidzenia && abs(pozycjay - y) <= polewidzenia)
+            if (abs(pozycja_x - x) <= pole_widzenia && abs(pozycja_y - y) <= pole_widzenia)
                 wstrone(x, y);
             else
-                PoruszanieSie(rozmiar);
+                poruszanie_sie(rozmiar);
         }
     }
 
-
-    //funkcja dzieki ktore postac sie bedzie poruszac losowo
-//    public void poruszaniesie(int rozmiar) {
-//        Random rand = new Random();
-//        int n;
-//        if (pozycjax == 0) {
-//            if (pozycjay == 0) {
-//                n = rand.nextInt(3) + 1;
-//                switch (n) {
-//                    case 1 -> pozycjay++;
-//                    case 2 -> {
-//                        pozycjax++;
-//                        pozycjay++;
-//                    }
-//                    case 3 -> pozycjax++;
-//                }
-//            } else if (pozycjay == rozmiar - 1) {
-//                n = rand.nextInt(3) + 1;
-//                switch (n) {
-//                    case 1 -> pozycjax++;
-//                    case 2 -> {
-//                        pozycjax++;
-//                        pozycjay--;
-//                    }
-//                    case 3 -> pozycjay--;
-//                }
-//            } else {
-//                n = rand.nextInt(5) + 1;
-//                switch (n) {
-//                    case 1 -> pozycjay++;
-//                    case 2 -> {
-//                        pozycjax++;
-//                        pozycjay++;
-//                    }
-//                    case 3 -> pozycjax++;
-//                    case 4 -> {
-//                        pozycjax++;
-//                        pozycjay--;
-//                    }
-//                    case 5 -> pozycjay--;
-//                }
-//            }
-//        } else if (pozycjax == rozmiar - 1) {
-//            if (pozycjay == 0) {
-//                n = rand.nextInt(3) + 1;
-//                switch (n) {
-//                    case 1 -> pozycjax--;
-//                    case 2 -> {
-//                        pozycjax--;
-//                        pozycjay++;
-//                    }
-//                    case 3 -> pozycjay++;
-//                }
-//            } else if (pozycjay == rozmiar - 1) {
-//                n = rand.nextInt(3) + 1;
-//                switch (n) {
-//                    case 1 -> pozycjay--;
-//                    case 2 -> {
-//                        pozycjax--;
-//                        pozycjay--;
-//                    }
-//                    case 3 -> pozycjax--;
-//                }
-//            } else {
-//                n = rand.nextInt(5) + 1;
-//                switch (n) {
-//                    case 1 -> pozycjay--;
-//                    case 2 -> {
-//                        pozycjax--;
-//                        pozycjay--;
-//                    }
-//                    case 3 -> pozycjax++;
-//                    case 4 -> {
-//                        pozycjax--;
-//                        pozycjay++;
-//                    }
-//                    case 5 -> pozycjay++;
-//                }
-//            }
-//        } else if (pozycjay == 0) {
-//            n = rand.nextInt(5) + 1;
-//            switch (n) {
-//                case 1 -> pozycjax--;
-//                case 2 -> {
-//                    pozycjax--;
-//                    pozycjay++;
-//                }
-//                case 3 -> pozycjay++;
-//                case 4 -> {
-//                    pozycjax++;
-//                    pozycjay++;
-//                }
-//                case 5 -> pozycjax++;
-//            }
-//        } else if (pozycjay == rozmiar - 1) {
-//            n = rand.nextInt(5) + 1;
-//            switch (n) {
-//                case 1 -> pozycjax++;
-//                case 2 -> {
-//                    pozycjax++;
-//                    pozycjay--;
-//                }
-//                case 3 -> pozycjay--;
-//                case 4 -> {
-//                    pozycjax--;
-//                    pozycjay--;
-//                }
-//                case 5 -> pozycjax--;
-//            }
-//        }
-//        else
-//        {
-//            n = rand.nextInt(8) + 1;
-//            switch (n) {
-//                case 1 -> {
-//                    pozycjax--;
-//                    pozycjay--;
-//                }
-//                case 2 -> pozycjax--;
-//                case 3 -> {pozycjax--; pozycjay++;}
-//                case 4 -> pozycjay++;
-//                case 5 -> {pozycjax++; pozycjay++;}
-//                case 6 -> pozycjax++;
-//                case 7 -> {pozycjax++; pozycjay--;}
-//                case 8 -> pozycjay--;
-//            }
-//        }
-//    }
-
-
-    //funkcja ktora pozwala MC kierowac sie w kierunku klucza
+    //funkcja ktora pozwala dresowi kierowac sie w kierunku glownego bohatera
     public void wstrone(int x, int y)
     {
         int X, Y;
-        X = x - pozycjax;
-        Y = y - pozycjay;
+        X = x - pozycja_x;
+        Y = y - pozycja_y;
         if(X > 0)
-            pozycjax++;
+            pozycja_x++;
         else if(X < 0)
-            pozycjax--;
+            pozycja_x--;
 
         if(Y > 0)
-            pozycjay++;
+            pozycja_y++;
         else if(Y < 0)
-            pozycjay--;
+            pozycja_y--;
     }
     //Metoda zwracajaca pozycje x
     public int Gimmex()
     {
-        return pozycjax;
+        return pozycja_x;
     }
 
     //Metoda zwracajaco pozycje y
     public int Gimmey()
     {
-        return pozycjay;
+        return pozycja_y;
     }
 
     //Metoda zwracajaca typ obiektu

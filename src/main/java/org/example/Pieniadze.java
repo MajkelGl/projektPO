@@ -1,25 +1,25 @@
 package org.example;
 
-public class money extends obiekt implements Pozycja{
+public class Pieniadze extends Obiekt implements Pozycja{
     public int wartosc;
 
-    public money(int pozycjax, int pozycjay, int wartosc)
+    public Pieniadze(int pozycja_x, int pozycja_y, int wartosc)
     {
-        this.pozycjax = pozycjax;
-        this.pozycjay = pozycjay;
+        this.pozycja_x = pozycja_x;
+        this.pozycja_y = pozycja_y;
         this.wartosc = wartosc;
     }
 
     //Metoda zwracajaca pozycje x
     public int Gimmex()
     {
-        return pozycjax;
+        return pozycja_x;
     }
 
     //Metoda zwracajaco pozycje y
     public int Gimmey()
     {
-        return pozycjay;
+        return pozycja_y;
     }
 
     //Metoda zwracajaca typ obiektu

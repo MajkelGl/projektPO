@@ -1,24 +1,25 @@
 package org.example;
 
-public class klucz extends obiekt implements Pozycja{
+public class Klucz extends Obiekt implements Pozycja{
 
 
-    public klucz(int pozycjax, int pozycjay)
+    //do implementacji klucza
+    public Klucz(int pozycja_x, int pozycja_y)
     {
-        this.pozycjax = pozycjax;
-        this.pozycjay = pozycjay;
+        this.pozycja_x = pozycja_x;
+        this.pozycja_y = pozycja_y;
     }
 
     //Metoda zwracajaca pozycje x
     public int Gimmex()
     {
-        return pozycjax;
+        return pozycja_x;
     }
 
     //Metoda zwracajaco pozycje y
     public int Gimmey()
     {
-        return pozycjay;
+        return pozycja_y;
     }
 
     //Metoda zwracajaca typ obiektu
