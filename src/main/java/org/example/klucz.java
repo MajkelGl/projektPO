@@ -2,6 +2,13 @@ package org.example;
 
 public class klucz extends obiekt implements Pozycja{
 
+
+    public klucz(int pozycjax, int pozycjay)
+    {
+        this.pozycjax = pozycjax;
+        this.pozycjay = pozycjay;
+    }
+
     //Metoda zwracajaca pozycje x
     public int Gimmex()
     {

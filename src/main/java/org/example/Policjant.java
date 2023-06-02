@@ -5,7 +5,14 @@ import java.util.Random;
 import static java.lang.Math.abs;
 
 public class Policjant extends obiekt implements Pozycja{
-    private final int polewidzenia = 2;
+    public int polewidzenia;
+
+    public Policjant(int pozycjax, int pozycjay, int polewidzenia)
+    {
+        this.pozycjax = pozycjax;
+        this.pozycjay = pozycjay;
+        this.polewidzenia = polewidzenia;
+    }
 
     public int czy_moze_aresztowac(int x,int y)
     {

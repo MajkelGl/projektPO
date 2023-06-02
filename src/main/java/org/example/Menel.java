@@ -3,9 +3,18 @@ package org.example;
 import java.util.Random;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.min;
 
 public class Menel extends zly implements Pozycja{
 
+
+    public Menel( int pozycjax, int pozycjay, int max_pieniedzy, int min_pieniedzy)
+    {
+        this.pozycjax = pozycjax;
+        this.pozycjay = pozycjay;
+        this.max_pieniedzy = max_pieniedzy;
+        this.min_pieniedzy = min_pieniedzy;
+    }
     public int czy_moze_okrasc(int x, int y,int rozmiar)
     {
         if(przerwaodkradzenia != 0)

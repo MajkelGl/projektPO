@@ -1,15 +1,23 @@
 package org.example;
-import java.util.Random;
 import static java.lang.Math.abs;
 
 class MainCharacter extends obiekt implements Pozycja{
     //ilosc pieniedzy
-    //test
     public int ilosc_pieniedzy;
     //na ile widzi
     int polewidzenia;
     //ile razy byl okradziony
     //private int kradziez = 0;
+
+
+    public MainCharacter(int pozycjax, int pozycjay, int ilosc_pieniedzy, int polewidzenia)
+    {
+        this.pozycjax = pozycjax;
+        this.pozycjay = pozycjay;
+        this.ilosc_pieniedzy = ilosc_pieniedzy;
+        this.polewidzenia = polewidzenia;
+    }
+
 
     //funkcja ktora pokazuje czy widzi klucz MC i uzaleznia czy idzie w strone klucza czy nie
     public int czy_widzi_klucz(int x, int y) {

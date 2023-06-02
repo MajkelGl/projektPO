@@ -4,7 +4,8 @@ import java.util.Random;
 
 public abstract class obiekt {
     //lokalizacja
-    int pozycjax, pozycjay;
+    public int pozycjax;
+    public int pozycjay;
 
     public void PoruszanieSie(int rozmiar)
     {
