@@ -133,7 +133,7 @@ public class Main {
             //jak tak to poruszanie sie w strone klucza
             //a po ruchu ponowne sprawdzenie czy moze podniesc klucz
             else if(Marek.czy_widzi_klucz(key.pozycja_x, key.pozycja_y) == 1) {
-                Marek.wstrone(key.pozycja_x, key.pozycja_y);
+                Marek.w_strone(key.pozycja_x, key.pozycja_y);
                 akcja++;
                 TypAkcji += "\nRuch w strone Klucza ";
                 if (Marek.czy_moze_podniesc_klucz(key.pozycja_x, key.pozycja_y) == 1) {
@@ -157,7 +157,7 @@ public class Main {
             //jak nie moze podniesc pieniedzy to sprawdzenie czy moze isc w ich kierunku
             else if (kasa != null && Marek.czy_widzi_pieniadze(kasa.pozycja_x, kasa.pozycja_y) == 1 && kasa.wartosc != 0)//jak MC nie widzi klucza to sprawdza czy widzi pieniadze
             {
-                Marek.wstrone(kasa.pozycja_x, kasa.pozycja_y);
+                Marek.w_strone(kasa.pozycja_x, kasa.pozycja_y);
                 akcja++;
                 TypAkcji += "\nRuch w strone pieniedzy ";
                 //ponowne sprawdzenie czy moze podniesc pieniadze

@@ -55,7 +55,7 @@ class Glowny_Bohater extends Obiekt implements Pozycja{
 
 
     //funkcja ktora pozwala glownemu bohaterowi kierowac sie w kierunku klucza/pieniedzy
-    public void wstrone(int x, int y)
+    public void w_strone(int x, int y)
     {
         int X, Y;
         X = x - pozycja_x;
