@@ -33,7 +33,7 @@ public class Main {
     public static void Dodawanie(int typ, int miejscex, int miejscey) {
         switch (typ) {
             case 1:
-                Pozycje[miejscex][miejscey] = ANSI_PURPLE + "Y" + ANSI_RESET;
+                Pozycje[miejscex][miejscey] = ANSI_PURPLE + "G" + ANSI_RESET;
                 break;
             case 2:
                 Pozycje[miejscex][miejscey] = ANSI_RED + "D" + ANSI_RESET;
