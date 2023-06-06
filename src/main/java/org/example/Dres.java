@@ -33,6 +33,19 @@ public class Dres extends Zly implements Pozycja{
         }
     }
 
+    public int czy_widzi_cos2(int x, int y)
+    {
+        if(przerwa_od_kradzenia != 0)
+            return 0;
+        else
+        {
+            if (abs(pozycja_x - x) <= pole_widzenia && abs(pozycja_y - y) <= pole_widzenia)
+                return 1;
+            else
+                return 0;
+        }
+    }
+
     public void czy_widzi_cos(int x, int y, int rozmiar) {
         if(przerwa_od_kradzenia != 0)
         {
