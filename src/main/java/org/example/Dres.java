@@ -46,21 +46,6 @@ public class Dres extends Zly implements Pozycja{
         }
     }
 
-    public void czy_widzi_cos(int x, int y, int rozmiar) {
-        if(przerwa_od_kradzenia != 0)
-        {
-                poruszanie_sie(rozmiar);
-                przerwa_od_kradzenia--;
-        }
-        else
-        {
-            if (abs(pozycja_x - x) <= pole_widzenia && abs(pozycja_y - y) <= pole_widzenia)
-                wstrone(x, y);
-            else
-                poruszanie_sie(rozmiar);
-        }
-    }
-
     //funkcja ktora pozwala dresowi kierowac sie w kierunku glownego bohatera
     public void wstrone(int x, int y)
     {
