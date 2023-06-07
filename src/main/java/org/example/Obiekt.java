@@ -7,7 +7,7 @@ public abstract class Obiekt {
     public int pozycja_x;
     public int pozycja_y;
 
-    public void poruszanie_sie(int rozmiar)
+    public void Poruszanie_sie(int rozmiar)
     {
         int poz_x_Test = 0;
         int poz_y_Test = 0;

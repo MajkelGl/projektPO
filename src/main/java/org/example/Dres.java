@@ -18,7 +18,7 @@ public class Dres extends Zly implements Pozycja{
         pole_widzenia = 2;
     }
 
-    public int czy_moze_okrasc(int x, int y)
+    public int Czy_moze_okrasc(int x, int y)
     {
         if(przerwa_od_kradzenia != 0)
         {
@@ -33,7 +33,7 @@ public class Dres extends Zly implements Pozycja{
         }
     }
 
-    public int czy_widzi_cos2(int x, int y)
+    public int Czy_widzi_cos2(int x, int y)
     {
         if(przerwa_od_kradzenia != 0)
             return 0;

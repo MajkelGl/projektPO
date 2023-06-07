@@ -12,7 +12,7 @@ public class Policjant extends Obiekt implements Pozycja{
         this.pole_widzenia = pole_widzenia;
     }
 
-    public int czy_moze_aresztowac(int x,int y)
+    public int Czy_moze_aresztowac(int x, int y)
     {
         if (abs(pozycja_x - x) <= 1 && abs(pozycja_y - y) <= 1)
             return 1;
@@ -20,7 +20,7 @@ public class Policjant extends Obiekt implements Pozycja{
             return 0;
     }
 
-    public int czy_widzi_dresa_lub_menela(int x, int y) {
+    public int Czy_widzi_dresa_lub_menela(int x, int y) {
         if (abs(pozycja_x - x) <= pole_widzenia && abs(pozycja_y - y) <= pole_widzenia)
             return 1;
         else

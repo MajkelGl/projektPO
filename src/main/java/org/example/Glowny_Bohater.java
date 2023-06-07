@@ -20,7 +20,7 @@ class Glowny_Bohater extends Obiekt implements Pozycja{
 
 
     //funkcja ktora pokazuje czy glowny bohater widzi klucz
-    public int czy_widzi_klucz(int x, int y) {
+    public int Czy_widzi_klucz(int x, int y) {
         if (abs(pozycja_x - x) <= pole_widzenia && abs(pozycja_y - y) <= pole_widzenia)
             return 1;
         else
@@ -28,7 +28,7 @@ class Glowny_Bohater extends Obiekt implements Pozycja{
     }
 
     //funkcja sprawdzajaca czy glowny bohater moze podniesc klucz
-    public int czy_moze_podniesc_klucz(int x, int y){
+    public int Czy_moze_podniesc_klucz(int x, int y){
         if(pozycja_x == x && pozycja_y == y)
             return 1;
         else
@@ -36,7 +36,7 @@ class Glowny_Bohater extends Obiekt implements Pozycja{
     }
 
     //funkcja ktora okresla czy glowny bohater widzi pieniadze
-    public int czy_widzi_pieniadze(int x, int y)
+    public int Czy_widzi_pieniadze(int x, int y)
     {
         if (abs(pozycja_x - x) <= pole_widzenia && abs(pozycja_y - y) <= pole_widzenia)
             return 1;
@@ -45,7 +45,7 @@ class Glowny_Bohater extends Obiekt implements Pozycja{
     }
 
     //funkcja okreslajaca czy glowny bohater moze podniesc pieniadze
-    public int czy_podniesie_pieniadza(int x, int y)
+    public int Czy_podniesie_pieniadza(int x, int y)
     {
         if (abs(pozycja_x - x) <= 1 && abs(pozycja_y - y) <= 1)
             return 1;
