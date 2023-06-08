@@ -23,7 +23,7 @@ public class Main {
         {
             for( int j = 0; j < rozmiar; j++)
             {
-                Pozycje[i][j] = "#";
+                Pozycje[i][j] = ".";
             }
         }
     }
