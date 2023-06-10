@@ -954,5 +954,7 @@ public class Main {
                     System.out.println("okradzenie");
                 System.out.println("koniecgry,    ilosc ruchow -> " + Ilosc_Ruchow);
                 //test
+        //test 2
+
         }
     }
