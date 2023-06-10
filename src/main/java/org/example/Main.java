@@ -551,66 +551,6 @@ public class Main {
                 else
                     Policjant.Poruszanie_sie(Rozmiar);
             }
-//            if(Kuba != null && Policjant.Czy_widzi_dresa_lub_menela(Kuba.pozycja_x, Kuba.pozycja_y) == 1)
-//                {
-//                    Akcja++;
-//                    Typ_Akcji += "\nPoruszanie sie w strone menela ";
-//                    int Pomoc1, Pomoc2 ;//potrzebne do przetrzymania pozycji policjanta przed jego ruchem do wyswietlania
-//                    Pomoc1 = Policjant.pozycja_x;
-//                    Pomoc2 = Policjant.pozycja_y;
-//                    Policjant.w_strone(Kuba.pozycja_x, Kuba.pozycja_y);
-//                    if (Policjant.Czy_moze_aresztowac(Kuba.pozycja_x, Kuba.pozycja_y) == 1)
-//                        {
-//                            //wyswietlanie przed ruchem policjanta
-//                            Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-//                            Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
-//                            if(Seba != null)
-//                                Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
-//
-//                            for (Pieniadze value : pieniadze)
-//                                if (value != null)
-//                                    Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-//                            Dodawanie(Policjant.GimmeType(), Pomoc1, Pomoc2);
-//                            Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-//                            System.out.println("Przed aresztowaniem Menela przed ruchem policjanta");
-//                            Wyswietlanie_Tablicy(Rozmiar);
-//                            System.out.println();
-//                            Reset(Rozmiar);
-//
-//                            Akcja++;
-//                            Typ_Akcji += "\nAresztowanie menela ";
-//
-//                            //wyswietlanie po ruchu policjanta
-//                            Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-//                            Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
-//                            if(Seba != null)
-//                                Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
-//
-//                            for (Pieniadze value : pieniadze)
-//                                if (value != null)
-//                                    Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-//
-//                            Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-//                            Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-//
-//                            System.out.println("Przed aresztowaniem Menela po ruchu policjanta");
-//                            Wyswietlanie_Tablicy(Rozmiar);
-//                            Reset(Rozmiar);
-//                            System.out.println();
-//
-//
-//                            Kuba = null;
-//                            //System.out.println("Policjant aresztuje menela");
-//                            if(Seba == null)
-//                            {
-//                                Ktory = 2;
-//                                break;
-//                            }
-//                        }
-//                }
-//                else {
-//                    Policjant.Poruszanie_sie(Rozmiar);
-//                }
 
 
                 //dodawanie poszczegolnych elementow do tablicy wyswietlajacej
