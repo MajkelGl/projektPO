@@ -23,7 +23,7 @@ public class Main {
         {
             for( int j = 0; j < rozmiar; j++)
             {
-                Pozycje[i][j] = ".";
+                Pozycje[i][j] = "·";
             }
         }
     }
@@ -66,12 +66,23 @@ public class Main {
             System.out.println();
         }
     }
+
+//    public static int atoi(String wejscie)
+//    {
+//            int liczba = 0;
+//            for (int i = 0; i < wejscie.length(); ++i)
+//                liczba = liczba * 10 + wejscie.charAt(i) - '0';
+//        return liczba;
+//    }
+
     public static void main(String[] args) {
         Random Losowy = new Random();
         //inicjalizacja rozmiaru planszy
         System.out.println("rozmiar mapy -> 25\n\n");
         //Scanner scan = new Scanner(System.in);
         int Rozmiar = 25;//scan.nextInt();
+
+        ///int ilosc_main = atoi(args[1]);
 
         //zaimplementowanie głównej postaci
         Glowny_Bohater Marek = new Glowny_Bohater(1, 1, 50, 5);
