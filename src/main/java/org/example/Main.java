@@ -83,17 +83,18 @@ public class Main {
         }
 
         //implementacja menela
-          Menel Kuba = new Menel(Losowy.nextInt(Rozmiar),Losowy.nextInt(Rozmiar),5,1);
 
-
-        Menel[] menele = new Menel[10];
-        for(int i = 0; i < 10;i++)
-        {
+        Menel[] menele = new Menel[5];
+        for(int i = 0; i < menele.length;i++)
             menele[i] = new Menel(Losowy.nextInt(50),Losowy.nextInt(50),5,1);
-        }
+
 
         //implementacja dresa
         Dres Seba = new Dres(Losowy.nextInt(Rozmiar),Losowy.nextInt(Rozmiar),10,5,0);
+
+        Dres[] dresy = new Dres[5];
+        for(int i = 0; i < dresy.length;i++)
+            dresy[i] = new Dres(Losowy.nextInt(Rozmiar),Losowy.nextInt(Rozmiar),10,5,0);
 
         //implementacja klucza
         Klucz Key = new Klucz(Losowy.nextInt(Rozmiar), Losowy.nextInt(Rozmiar));
@@ -126,7 +127,9 @@ public class Main {
         for (Menel menel : menele)
             if (menel != null)
                 Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-        Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+        for (Dres dres : dresy)
+            if (dres != null)
+                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
         for (Pieniadze value : pieniadze)
                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
         Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
@@ -195,10 +198,10 @@ public class Main {
 
                 }
                 odleglosc = 2147483647; //parametry potrzebne do okreslenia ktore pieniadze sa najblizej
-                liczba = -1;
+                liczba = -1;//jak zmieni wartosc to znaczy ze jest jakis pieniadz ktory ma wartosc != null i do ktorego moze podejsc glowny bohater
                 for(int i = 0; i < pieniadze.length; i++)
                 {
-                    if(pieniadze[i] != null)
+                    if(pieniadze[i] != null && Marek.Czy_widzi_pieniadze(pieniadze[i].pozycja_x,pieniadze[i].pozycja_y) == 1)
                     {
                         tymcz_odlegl = (pieniadze[i].pozycja_x - Marek.pozycja_x)*(pieniadze[i].pozycja_x - Marek.pozycja_x) + (pieniadze[i].pozycja_y - Marek.pozycja_y)*(pieniadze[i].pozycja_y - Marek.pozycja_y);
                             if(tymcz_odlegl < odleglosc)
@@ -210,7 +213,10 @@ public class Main {
                 }
                 if(liczba != -1)
                 {
+                    Akcja++;
+                    Typ_Akcji += "Ruch w strone pieniadza przez Glownego bohatera";
                     Marek.w_strone(pieniadze[liczba].pozycja_x, pieniadze[liczba].pozycja_y);
+
                     if (pieniadze[liczba] != null && Marek.Czy_podniesie_pieniadza(pieniadze[liczba].pozycja_x, pieniadze[liczba].pozycja_y) == 1)
                     {
                         Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
@@ -330,13 +336,11 @@ public class Main {
                     if(menele[j].Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)
                     {
                         Akcja++;
-                        Typ_Akcji += "\nKradziez ";
                         Kradziez = Losowy.nextInt(menele[j].max_pieniedzy - menele[j].min_pieniedzy + 1) + menele[j].min_pieniedzy;//losowanie z przedzialu liczby ile kradnie menel
                         Marek.ilosc_pieniedzy -= Kradziez;//kradziez menela
-                        System.out.println("Menel ukradł -> " + Kradziez + "     ruch   " + Ilosc_Ruchow);
-                        System.out.println("Glownemu bohaterowi zostalo -> " + Marek.ilosc_pieniedzy);
-                        Akcja++;
-                        Typ_Akcji += "Kradziez menela";
+                        Typ_Akcji += ("\nMenel ukradł -> " + Kradziez + "     ruch   " + Ilosc_Ruchow);
+                        Typ_Akcji += ("\nGlownemu bohaterowi zostalo -> " + Marek.ilosc_pieniedzy);
+                        Typ_Akcji += "\nKradziez menela";
 
                         //wyswietlanie przed kradzieza
                         Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
@@ -487,7 +491,7 @@ public class Main {
                                     czy_koniec = 0;
                                     break;
                                 }
-                            if(czy_koniec == 1) {
+                            if(czy_koniec == 1 && Seba == null) {
                                 Ktory = 2;
                                 break;
                             }
@@ -499,7 +503,7 @@ public class Main {
                 liczba = -1;
                 for(int i = 0; i < menele.length;i++)
                 {
-                    if(menele[i] != null)
+                    if(menele[i] != null && Policjant.Czy_widzi_dresa_lub_menela(menele[i].pozycja_x, menele[i].pozycja_y) == 1)
                     {
                         tymcz_odlegl = (menele[i].pozycja_x - Policjant.pozycja_x)*(menele[i].pozycja_x - Policjant.pozycja_x) + (menele[i].pozycja_y - Policjant.pozycja_y)*(menele[i].pozycja_y - Policjant.pozycja_y);
                         if(tymcz_odlegl < odleglosc)
@@ -542,7 +546,7 @@ public class Main {
                                 czy_koniec = 0;
                                 break;
                             }
-                        if(czy_koniec == 1) {
+                        if(czy_koniec == 1 && Seba == null) {
                             Ktory = 2;
                             break;
                         }
