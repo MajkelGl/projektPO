@@ -1,10 +1,11 @@
 package org.example;
 import java.util.Random;
 
+
 public class Main {
 
     // Tablica stringow potrzebna do wizualizacji
-    static String[][] Pozycje = new String[25][25];
+    static String[][] Pozycje = new String[50][50];
 
 
     // Kolorki :}
@@ -78,9 +79,9 @@ public class Main {
     public static void main(String[] args) {
         Random Losowy = new Random();
         //inicjalizacja rozmiaru planszy
-        System.out.println("rozmiar mapy -> 25\n\n");
+        System.out.println("rozmiar mapy -> 50\n\n");
         //Scanner scan = new Scanner(System.in);
-        int Rozmiar = 25;//scan.nextInt();
+        int Rozmiar = 50;//scan.nextInt();
 
         ///int ilosc_main = atoi(args[1]);
 
@@ -89,6 +90,12 @@ public class Main {
 
         //implementacja pieniądza
         Pieniadze Kasa = new Pieniadze(15,5,50);
+
+        Pieniadze[] pieniadze = new Pieniadze[10];
+        for(int i = 0; i < 10;i++)
+        {
+            pieniadze[i] = new Pieniadze(Losowy.nextInt(50),Losowy.nextInt(50),Losowy.nextInt(30 - 10 + 1 ) + 10);
+        }
 
         //implementacja menela
           Menel Kuba = new Menel(0,Rozmiar-1,5,1);
@@ -127,6 +134,9 @@ public class Main {
         //Jaki typ akcji został wykonany
         String Typ_Akcji = " ";
 
+        int liczba;//parametry potrzebne do okreslania ktory obiekt jest blizej przy ruchu glownego bohatera i menela
+        int odleglosc, tymcz_odlegl;
+
         while (true) {
             Ilosc_Ruchow++;
             //sprawdzenie czy glowny bohater moze podniesc klucz jezeli tak to koniec gry
@@ -146,7 +156,6 @@ public class Main {
                 Akcja++;
                 Typ_Akcji += "\nRuch w strone klucza przez Glownego Bohatera";
 
-
                 if (Marek.Czy_moze_podniesc_klucz(Key.pozycja_x, Key.pozycja_y) == 1) {
                     Typ_Akcji += "\nPodniesienie klucza przez Glownego Bohatera";
                     Key = null;
@@ -154,67 +163,84 @@ public class Main {
                     break;
                 }
             }
-            //jak nie widzi klucza to sprawdzenie czy moze podniesc pieniadze
-            else if(Kasa != null && Marek.Czy_podniesie_pieniadza(Kasa.pozycja_x, Kasa.pozycja_y) == 1) {
-                Akcja++;
-                Typ_Akcji += "\nPodniesienie pieniadza przez Glownego Bohatera";
-
-                Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-                if(Kuba != null)
-                    Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
-                if(Seba != null)
-                    Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
-                Dodawanie(Kasa.GimmeType(),Kasa.Gimmex(), Kasa.Gimmey());
-                Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                System.out.println("Przed podniesieniem Pieniadza przez Glownego Bohatera");
-                Wyswietlanie_Tablicy(Rozmiar);
-                System.out.println();
-                Reset(Rozmiar);
-
-                Marek.ilosc_pieniedzy += Kasa.wartosc;
-                Typ_Akcji += "Głowny bohater podnosi pieniadze   ->   " + Kasa.wartosc;
-                Typ_Akcji += "Glowny bohater ma teraz " + Marek.ilosc_pieniedzy + " pieniedzy";
-                Kasa = null;
-                //z tego wynika ze nie widzi klucza a pieniadze podniosl takze ruch Losowy bo nic innego nie widzi
-                Marek.Poruszanie_sie(Rozmiar);
-            }
-            //jak nie moze podniesc pieniedzy to sprawdzenie czy moze isc w ich kierunku
-            else if (Kasa != null && Marek.Czy_widzi_pieniadze(Kasa.pozycja_x, Kasa.pozycja_y) == 1)//jak MC nie widzi klucza to sprawdza czy widzi pieniadze
+            else
             {
-                Marek.w_strone(Kasa.pozycja_x, Kasa.pozycja_y);
-                Akcja++;
-                Typ_Akcji += "\nRuch w strone pieniedzy przez Glownego Bohatera";
-                //ponowne sprawdzenie czy moze podniesc pieniadze
-                if (Marek.Czy_podniesie_pieniadza(Kasa.pozycja_x, Kasa.pozycja_y) == 1) {
-                    Akcja++;
-                    Typ_Akcji += "\nPodniesienie pieniadza przez Glownego Bohatera";
+                for(int i = 0; i < pieniadze.length; i++) //sprawdzenie czy glowny bohater moze podniesc pieniadze
+                {
+                    if (pieniadze[i] != null && Marek.Czy_podniesie_pieniadza(pieniadze[i].pozycja_x, pieniadze[i].pozycja_y) == 1)
+                    {
+                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
+                        if(Kuba != null)
+                            Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
+                        if(Seba != null)
+                            Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+                        for(int j = 0; j < pieniadze.length; j++) {
+                            if (pieniadze[j] != null)
+                                Dodawanie(pieniadze[j].GimmeType(), pieniadze[j].Gimmex(), pieniadze[j].Gimmey());
+                        }
+                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
+                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+                        System.out.println("Przed podniesieniem Pieniadza przez Glownego Bohatera");
+                        Wyswietlanie_Tablicy(Rozmiar);
+                        System.out.println();
+                        Reset(Rozmiar);
 
-                    Marek.ilosc_pieniedzy += Kasa.wartosc;
-                    Typ_Akcji += "\nGłowny bohater podnosi pieniadze   ->   " + Kasa.wartosc;
-                    Typ_Akcji += "\nGlowny bohater ma teraz " + Marek.ilosc_pieniedzy + " pieniedzy";
+                        Marek.ilosc_pieniedzy += pieniadze[i].wartosc;
+                        Typ_Akcji += "\nGłowny bohater podnosi pieniadze   ->   " + pieniadze[i].wartosc;
+                        Typ_Akcji += "\nGlowny bohater ma teraz " + Marek.ilosc_pieniedzy + " pieniedzy";
 
-                    Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-                    if(Kuba != null)
-                        Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
-                    if(Seba != null)
-                        Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
-                    Dodawanie(Kasa.GimmeType(),Kasa.Gimmex(), Kasa.Gimmey());
-                    Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                    Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                    System.out.println("Przed podniesieniem Pieniadza po ruchu Glownego Bohatera");
-                    Wyswietlanie_Tablicy(Rozmiar);
-                    System.out.println();
-                    Reset(Rozmiar);
+                        pieniadze[i] = null;
+                        Akcja++;
+                        Typ_Akcji += "\nPodniesienie pieniadza przez Glownego Bohatera";
+                    }
 
-                    Kasa = null;
                 }
-            }
-            else//jak marek nic nie widzi porusza sie losowo
-            {
-                Marek.Poruszanie_sie(Rozmiar);
-            }
+                odleglosc = 2147483647; //parametry potrzebne do okreslenia ktore pieniadze sa najblizej
+                liczba = -1;
+                for(int i = 0; i < pieniadze.length; i++)
+                {
+                    if(pieniadze[i] != null)
+                    {
+                        tymcz_odlegl = (pieniadze[i].pozycja_x - Marek.pozycja_x)*(pieniadze[i].pozycja_x - Marek.pozycja_x) + (pieniadze[i].pozycja_y - Marek.pozycja_y)*(pieniadze[i].pozycja_y - Marek.pozycja_y);
+                            if(tymcz_odlegl < odleglosc)
+                            {
+                                odleglosc = tymcz_odlegl;
+                                liczba = i;
+                            }
+                    }
+                }
+                if(liczba != -1)
+                {
+                    Marek.w_strone(pieniadze[liczba].pozycja_x, pieniadze[liczba].pozycja_y);
+                    if (pieniadze[liczba] != null && Marek.Czy_podniesie_pieniadza(pieniadze[liczba].pozycja_x, pieniadze[liczba].pozycja_y) == 1)
+                    {
+                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
+                        if(Kuba != null)
+                            Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
+                        if(Seba != null)
+                            Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+                        for(int j = 0; j < pieniadze.length;j++)
+                            if(pieniadze[j] != null)
+                                Dodawanie(pieniadze[j].GimmeType(),pieniadze[j].Gimmex(), pieniadze[j].Gimmey());
+                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
+                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+                        System.out.println("Przed podniesieniem Pieniadza przez Glownego Bohatera");
+                        Wyswietlanie_Tablicy(Rozmiar);
+                        System.out.println();
+                        Reset(Rozmiar);
 
+                        Marek.ilosc_pieniedzy += pieniadze[liczba].wartosc;
+                        Typ_Akcji += "Głowny bohater podnosi pieniadze   ->   " + pieniadze[liczba].wartosc;
+                        Typ_Akcji += "Glowny bohater ma teraz " + Marek.ilosc_pieniedzy + " pieniedzy";
+
+                        pieniadze[liczba] = null;
+                        Akcja++;
+                        Typ_Akcji += "\nPodniesienie pieniadza przez Glownego Bohatera";
+                    }
+                }
+                else
+                    Marek.Poruszanie_sie(Rozmiar);
+            }
 
             //ruch dresa
             if(Seba != null) {
@@ -234,8 +260,9 @@ public class Main {
                     if(Kuba != null)
                         Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
                     Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
-                    if( Kasa != null)
-                        Dodawanie(Kasa.GimmeType(),Kasa.Gimmex(), Kasa.Gimmey());
+                    for(int j = 0; j < pieniadze.length;j++)
+                        if(pieniadze[j] != null)
+                            Dodawanie(pieniadze[j].GimmeType(),pieniadze[j].Gimmex(), pieniadze[j].Gimmey());
                     Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
                     Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
                     System.out.println("Przed kradzieza po ruchu dresa");
@@ -266,8 +293,9 @@ public class Main {
                         if(Kuba != null)
                             Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
                         Dodawanie(Seba.GimmeType(), Pomoc1, Pomoc2);
-                        if( Kasa != null)
-                            Dodawanie(Kasa.GimmeType(),Kasa.Gimmex(), Kasa.Gimmey());
+                        for(int j = 0; j < pieniadze.length;j++)
+                            if(pieniadze[j] != null)
+                                Dodawanie(pieniadze[j].GimmeType(),pieniadze[j].Gimmex(), pieniadze[j].Gimmey());
 
                         Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
                         Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
@@ -308,60 +336,32 @@ public class Main {
                     Kuba.przerwa_od_kradzenia = 3;//ustawienie przerwy od kradzenia dla menela
                     Kuba.Poruszanie_sie(Rozmiar);//ruszanie sie menela
                 }
-                else if(Kasa != null && Kuba.Czy_podniesie_pieniadza(Kasa.pozycja_x,Kasa.pozycja_y) == 1)
-                {
-                    Akcja++;
-                    Typ_Akcji += "Podniesienie pieniadza przez menela";
-
-
-                    //wyswietlanie przed podniesieniem pieniadza
-                    Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-                    Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
-                    if(Seba != null)
-                        Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
-                    Dodawanie(Kasa.GimmeType(),Kasa.Gimmex(), Kasa.Gimmey());
-                    Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                    Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                    System.out.println("Przed podniesieniem pieniadza przez menela");
-                    Wyswietlanie_Tablicy(Rozmiar);
-                    System.out.println();
-                    Reset(Rozmiar);
-
-                    Kuba.przerwa_od_kradzenia--;
-                    Kasa = null;
-                    Kuba.Poruszanie_sie(Rozmiar);
-                }
                 else
                 {
+                    for (int i = 0; i < pieniadze.length;i++)
+                        if(pieniadze[i] != null && Kuba.Czy_podniesie_pieniadza(pieniadze[i].pozycja_x,pieniadze[i].pozycja_y) == 1)
+                        {
+                            Akcja++;
+                            Typ_Akcji += "Podniesienie pieniadza przez menela";
+
+                            //wyswietlanie przed podniesieniem pieniadza
+                            Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
+                            Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
+                            if(Seba != null)
+                                Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+                            for(int j = 0; j < pieniadze.length;j++)
+                                if(pieniadze[j] != null)
+                                    Dodawanie(pieniadze[j].GimmeType(),pieniadze[j].Gimmex(), pieniadze[j].Gimmey());
+                            Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
+                            Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+                            System.out.println("Przed podniesieniem pieniadza przez menela");
+                            Wyswietlanie_Tablicy(Rozmiar);
+                            System.out.println();
+                            Reset(Rozmiar);
+
+                            pieniadze[i] = null;
+                        }
                     Kuba.Poruszanie_sie(Rozmiar);
-                    Kuba.przerwa_od_kradzenia--;
-                    if (Kuba.Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1) {
-                        Akcja++;
-                        Typ_Akcji += "\nKradziez ";
-                        Kradziez = Losowy.nextInt(Kuba.max_pieniedzy - Kuba.min_pieniedzy + 1) + Kuba.min_pieniedzy;//losowanie z przedzialu liczby ile kradnie menel
-                        Marek.ilosc_pieniedzy -= Kradziez;//kradziez menela
-
-                        //wyswietlanie
-                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-                        Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
-                        if(Seba != null)
-                            Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
-                        if(Kasa != null)
-                            Dodawanie(Kasa.GimmeType(),Kasa.Gimmex(), Kasa.Gimmey());
-                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                        System.out.println("Przed kradzieza po ruchu dresa");
-                        Wyswietlanie_Tablicy(Rozmiar);
-                        System.out.println();
-                        Reset(Rozmiar);
-                        System.out.println("Menel ukradł -> " + Kradziez + "     ruch   " + Ilosc_Ruchow);
-                        System.out.println("Glownemu bohaterowi zostalo -> " + Marek.ilosc_pieniedzy);
-
-
-                        if (Marek.ilosc_pieniedzy <= 0)//sprawdzenie czy menel ukradl na tyle ze jest koniec gry
-                            break;
-                        Kuba.przerwa_od_kradzenia = 3;
-                    }
                 }
             }
 
@@ -382,8 +382,9 @@ public class Main {
                             if(Kuba != null)
                                 Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
                             Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
-                            if( Kasa != null)
-                                Dodawanie(Kasa.GimmeType(),Kasa.Gimmex(), Kasa.Gimmey());
+                            for(int j = 0; j < pieniadze.length;j++)
+                                if(pieniadze[j] != null)
+                                    Dodawanie(pieniadze[j].GimmeType(),pieniadze[j].Gimmex(), pieniadze[j].Gimmey());
                             Dodawanie(Policjant.GimmeType(), Pomoc1, Pomoc2);
                             Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
                             System.out.println("Przed aresztowaniem Dresa przed ruchem policjanta");
@@ -400,8 +401,9 @@ public class Main {
                             if(Kuba != null)
                                 Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
                             Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
-                            if( Kasa != null)
-                                Dodawanie(Kasa.GimmeType(),Kasa.Gimmex(), Kasa.Gimmey());
+                            for(int j = 0; j < pieniadze.length;j++)
+                                if(pieniadze[j] != null)
+                                    Dodawanie(pieniadze[j].GimmeType(),pieniadze[j].Gimmex(), pieniadze[j].Gimmey());
                             Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
                             Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
                             System.out.println("Przed aresztowaniem Dresa po ruchu policjanta");
@@ -434,8 +436,9 @@ public class Main {
                             if(Seba != null)
                                 Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
 
-                            if( Kasa != null)
-                                Dodawanie(Kasa.GimmeType(),Kasa.Gimmex(), Kasa.Gimmey());
+                            for(int j = 0; j < pieniadze.length;j++)
+                                if(pieniadze[j] != null)
+                                    Dodawanie(pieniadze[j].GimmeType(),pieniadze[j].Gimmex(), pieniadze[j].Gimmey());
                             Dodawanie(Policjant.GimmeType(), Pomoc1, Pomoc2);
                             Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
                             System.out.println("Przed aresztowaniem Menela przed ruchem policjanta");
@@ -452,8 +455,9 @@ public class Main {
                             if(Seba != null)
                                 Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
 
-                            if( Kasa != null)
-                                Dodawanie(Kasa.GimmeType(),Kasa.Gimmex(), Kasa.Gimmey());
+                            for(int j = 0; j < pieniadze.length;j++)
+                                if(pieniadze[j] != null)
+                                    Dodawanie(pieniadze[j].GimmeType(),pieniadze[j].Gimmex(), pieniadze[j].Gimmey());
 
                             Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
                             Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
@@ -484,10 +488,9 @@ public class Main {
                 Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
             if(Seba != null)
                 Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
-            if( Kasa != null)
-            {
-                Dodawanie(Kasa.GimmeType(),Kasa.Gimmex(), Kasa.Gimmey());
-            }
+            for(int j = 0; j < pieniadze.length;j++)
+                if(pieniadze[j] != null)
+                    Dodawanie(pieniadze[j].GimmeType(),pieniadze[j].Gimmex(), pieniadze[j].Gimmey());
             Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
             Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
 
@@ -509,10 +512,9 @@ public class Main {
             Dodawanie(Kuba.GimmeType(), Kuba.Gimmex(), Kuba.Gimmey());
         if(Seba != null)
             Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
-        if(Kasa != null)
-        {
-            Dodawanie(Kasa.GimmeType(),Kasa.Gimmex(), Kasa.Gimmey());
-        }
+        for(int j = 0; j < pieniadze.length;j++)
+            if(pieniadze[j] != null)
+                Dodawanie(pieniadze[j].GimmeType(),pieniadze[j].Gimmex(), pieniadze[j].Gimmey());
         Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
         if(Key != null)
             Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
