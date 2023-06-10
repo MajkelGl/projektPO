@@ -955,6 +955,6 @@ public class Main {
                 System.out.println("koniecgry,    ilosc ruchow -> " + Ilosc_Ruchow);
                 //test
         //test 2
-
+        //test 3
         }
     }
