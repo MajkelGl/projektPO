@@ -953,5 +953,6 @@ public class Main {
                 else
                     System.out.println("okradzenie");
                 System.out.println("koniecgry,    ilosc ruchow -> " + Ilosc_Ruchow);
+                //test
         }
     }
