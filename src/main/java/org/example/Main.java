@@ -1,4 +1,7 @@
 package org.example;
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
 import java.util.Random;
 
 public class Main {
@@ -68,12 +71,15 @@ public class Main {
             System.out.println();
         }
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Random losowy = new Random();
         //inicjalizacja rozmiaru planszy
         System.out.println("rozmiar mapy -> 25");
         //Scanner scan = new Scanner(System.in);
         int rozmiar = 25;//scan.nextInt();
+
+        PrintWriter zapis = new PrintWriter("wyniki.txt");
+
 
         //zaimplementowanie głównej postaci
         Glowny_Bohater Marek = new Glowny_Bohater(1, 1, 50, 5);
@@ -121,7 +127,7 @@ public class Main {
         while (true) {
             iloscruchow++;
             //sprawdzenie czy glowny bohater moze podniesc klucz jezeli tak to koniec gry
-            if(Marek.czy_moze_podniesc_klucz(key.pozycja_x,key.pozycja_y) == 1)
+            if(Marek.Czy_moze_podniesc_klucz(key.pozycja_x,key.pozycja_y) == 1)
             {
                 akcja++;
                 key = null;
@@ -132,11 +138,11 @@ public class Main {
             //jak glowny bohater nie moze podniesc klucza to sprawdzenie czy go widzi
             //jak tak to poruszanie sie w strone klucza
             //a po ruchu ponowne sprawdzenie czy moze podniesc klucz
-            else if(Marek.czy_widzi_klucz(key.pozycja_x, key.pozycja_y) == 1) {
-                Marek.wstrone(key.pozycja_x, key.pozycja_y);
+            else if(Marek.Czy_widzi_klucz(key.pozycja_x, key.pozycja_y) == 1) {
+                Marek.w_strone(key.pozycja_x, key.pozycja_y);
                 akcja++;
                 TypAkcji += "\nRuch w strone Klucza ";
-                if (Marek.czy_moze_podniesc_klucz(key.pozycja_x, key.pozycja_y) == 1) {
+                if (Marek.Czy_moze_podniesc_klucz(key.pozycja_x, key.pozycja_y) == 1) {
                     TypAkcji += "\nPodniesienie klucza ";
                     key = null;
                     ktory = 1;
@@ -144,7 +150,7 @@ public class Main {
                 }
             }
             //jak nie widzi klucza to sprawdzenie czy moze podniesc pieniadze
-            else if (kasa != null && Marek.czy_podniesie_pieniadza(kasa.pozycja_x, kasa.pozycja_y) == 1) {
+            else if (kasa != null && Marek.Czy_podniesie_pieniadza(kasa.pozycja_x, kasa.pozycja_y) == 1) {
                 akcja++;
                 TypAkcji += "\nPodniesienie pieniadza ";
                 Marek.ilosc_pieniedzy += kasa.wartosc;
@@ -152,16 +158,16 @@ public class Main {
                 System.out.println("Glowny bohater ma teraz " + Marek.ilosc_pieniedzy + " pieniedzy");
                 kasa = null;
                 //z tego wynika ze nie widzi klucza a pieniadze podniosl takze ruch losowy bo nic innego nie widzi
-                Marek.poruszanie_sie(rozmiar);
+                Marek.Poruszanie_sie(rozmiar);
             }
             //jak nie moze podniesc pieniedzy to sprawdzenie czy moze isc w ich kierunku
-            else if (kasa != null && Marek.czy_widzi_pieniadze(kasa.pozycja_x, kasa.pozycja_y) == 1 && kasa.wartosc != 0)//jak MC nie widzi klucza to sprawdza czy widzi pieniadze
+            else if (kasa != null && Marek.Czy_widzi_pieniadze(kasa.pozycja_x, kasa.pozycja_y) == 1 && kasa.wartosc != 0)//jak MC nie widzi klucza to sprawdza czy widzi pieniadze
             {
-                Marek.wstrone(kasa.pozycja_x, kasa.pozycja_y);
+                Marek.w_strone(kasa.pozycja_x, kasa.pozycja_y);
                 akcja++;
                 TypAkcji += "\nRuch w strone pieniedzy ";
                 //ponowne sprawdzenie czy moze podniesc pieniadze
-                if (Marek.czy_podniesie_pieniadza(kasa.pozycja_x, kasa.pozycja_y) == 1) {
+                if (Marek.Czy_podniesie_pieniadza(kasa.pozycja_x, kasa.pozycja_y) == 1) {
                     akcja++;
                     TypAkcji += "\nPodniesienie pieniadza ";
                     Marek.ilosc_pieniedzy += kasa.wartosc;
@@ -172,13 +178,13 @@ public class Main {
             }
             else//jak marek nic nie widzi porusza sie losowo
             {
-                Marek.poruszanie_sie(rozmiar);
+                Marek.Poruszanie_sie(rozmiar);
             }
 
 
             //ruch dresa
             if(Seba != null) {
-                if (Seba.czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)//sprawdzenie czy dres moze okrasc glownego bohatera
+                if (Seba.Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)//sprawdzenie czy dres moze okrasc glownego bohatera
                 {
                     akcja++;
                     TypAkcji += "\nKradziez ";
@@ -189,10 +195,10 @@ public class Main {
                     if (Marek.ilosc_pieniedzy <= 0)//sprawdzenie czy dres okradl na tyle ze jest koniec gry
                         break;
                     Seba.przerwa_od_kradzenia = 7;//ustawienie przerwy dla dresa zeby nie chodzil za MC i kradl go caly czas
-                    Seba.czy_widzi_cos(Marek.pozycja_x, Marek.pozycja_y, rozmiar);//ruszanie sie dresa
+                    Seba.Czy_widzi_cos(Marek.pozycja_x, Marek.pozycja_y);//ruszanie sie dresa
                 } else {
-                    Seba.czy_widzi_cos(Marek.pozycja_x, Marek.pozycja_y, rozmiar);//ruszanie sie dresa
-                    if (Seba.czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)//sprawdzenie czy dres moze okrasc
+                    Seba.Czy_widzi_cos(Marek.pozycja_x, Marek.pozycja_y);//ruszanie sie dresa
+                    if (Seba.Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)//sprawdzenie czy dres moze okrasc
                     {
                         akcja++;
                         TypAkcji += "\nKradziez ";
@@ -210,7 +216,7 @@ public class Main {
 
             //ruch menela
             if(Kuba != null) {
-                if (Kuba.czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)//ruch menela
+                if (Kuba.Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)//ruch menela
                 {
                     akcja++;
                     TypAkcji += "\nKradziez ";
@@ -221,11 +227,11 @@ public class Main {
                     if (Marek.ilosc_pieniedzy <= 0)//sprawdzenie czy menel okradl na tyle ze jest koniec gry
                         break;
                     Kuba.przerwa_od_kradzenia = 3;//ustawienie przerwy od kradzenia dla menela
-                    Kuba.poruszanie_sie(rozmiar);//ruszanie sie menela
+                    Kuba.Poruszanie_sie(rozmiar);//ruszanie sie menela
                 } else {
-                    Kuba.poruszanie_sie(rozmiar);
+                    Kuba.Poruszanie_sie(rozmiar);
                     Kuba.przerwa_od_kradzenia--;
-                    if (Kuba.czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1) {
+                    if (Kuba.Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1) {
                         akcja++;
                         TypAkcji += "\nKradziez ";
                         kradziez = losowy.nextInt(Kuba.max_pieniedzy - Kuba.min_pieniedzy + 1) + Kuba.min_pieniedzy;//losowanie z przedzialu liczby ile kradnie menel
@@ -240,12 +246,12 @@ public class Main {
             }
 
             //pozniej po mozliwym aresztowaniu ruszanie sie policjanta
-            if (Seba != null && Policjant.czy_widzi_dresa_lub_menela(Seba.pozycja_x, Seba.pozycja_y) == 1)
+            if (Seba != null && Policjant.Czy_widzi_dresa_lub_menela(Seba.pozycja_x, Seba.pozycja_y) == 1)
                 {
                     akcja++;
                     TypAkcji += "\nPoruszanie sie w strone dresa";
                     Policjant.w_strone(Seba.pozycja_x, Seba.pozycja_y);
-                    if (Policjant.czy_moze_aresztowac(Seba.pozycja_x, Seba.pozycja_y) == 1)
+                    if (Policjant.Czy_moze_aresztowac(Seba.pozycja_x, Seba.pozycja_y) == 1)
                         {
                             akcja++;
                             TypAkcji += "\nAresztowanie dresa ";
@@ -271,12 +277,12 @@ public class Main {
                             }
                         }
                 }
-            else if(Kuba != null && Policjant.czy_widzi_dresa_lub_menela(Kuba.pozycja_x, Kuba.pozycja_y) == 1)
+            else if(Kuba != null && Policjant.Czy_widzi_dresa_lub_menela(Kuba.pozycja_x, Kuba.pozycja_y) == 1)
                 {
                     akcja++;
                     TypAkcji += "\nPoruszanie sie w strone menela ";
                     Policjant.w_strone(Kuba.pozycja_x, Kuba.pozycja_y);
-                    if (Policjant.czy_moze_aresztowac(Kuba.pozycja_x, Kuba.pozycja_y) == 1)
+                    if (Policjant.Czy_moze_aresztowac(Kuba.pozycja_x, Kuba.pozycja_y) == 1)
                         {
                             akcja++;
                             TypAkcji += "\nAresztowanie menela ";
@@ -305,7 +311,7 @@ public class Main {
                         }
                 }
                 else {
-                    Policjant.poruszanie_sie(rozmiar);
+                    Policjant.Poruszanie_sie(rozmiar);
                 }
 
 
@@ -363,12 +369,19 @@ public class Main {
             System.out.println();
         }
 
-                if (ktory == 1)
+                if (ktory == 1) {
                     System.out.println("zebranie klucza");
-                else if(ktory == 2)
+                    zapis.println("1" + " " + iloscruchow );
+                }
+
+                else if(ktory == 2) {
                     System.out.println("aresztowanie wszystkich meneli i dresow");
+                    zapis.println("2" + " " + iloscruchow );
+                }
+
                 else
                     System.out.println("okradzenie");
                 System.out.println("koniecgry,    ilosc ruchow -> " + iloscruchow);
+                zapis.close();
         }
     }
