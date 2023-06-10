@@ -336,91 +336,91 @@ public class Main {
                 }
             }
 
-
-
-            //ruch dresa
-            if(Seba != null) {
-                if (Ilosc_Ruchow == 1 && Seba.Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)//sprawdzenie czy dres moze okrasc glownego bohatera
-                {
-                    Akcja++;
-                    Typ_Akcji += "\nKradziez przez Dresa";
-                    Kradziez = Losowy.nextInt(Seba.max_pieniedzy - Seba.min_pieniedzy + 1) + Seba.min_pieniedzy;//losowanie z przedzialu liczby ile kradnie dres
-                    Marek.ilosc_pieniedzy -= Kradziez;//kradziez dresa
-
-
-                    Typ_Akcji += "\nDres ukradł -> " + Kradziez + "     ruch   " + Ilosc_Ruchow;
-                    Typ_Akcji += "\nGlownemu bohaterowi zostalo -> " + Marek.ilosc_pieniedzy;
-
-
-                    Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-                    for (Menel menel : menele)
-                        if (menel != null)
-                            Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                    for (Dres dres : dresy)
-                        if (dres != null)
-                            Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-                    for (Pieniadze value : pieniadze)
-                        if (value != null)
-                            Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                    Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                    Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                    System.out.println("Przed kradzieza po ruchu dresa");
-                    Wyswietlanie_Tablicy(Rozmiar);
-                    System.out.println();
-                    Reset(Rozmiar);
-
-                    if (Marek.ilosc_pieniedzy <= 0)//sprawdzenie czy dres okradl na tyle ze jest koniec gry
-                        break;
-                    Seba.przerwa_od_kradzenia = 7;//ustawienie przerwy dla dresa zeby nie chodzil za MC i kradl go caly czas
-                }
-                else if(Seba.Czy_widzi_cos(Marek.pozycja_x, Marek.pozycja_y) == 1)
-                {
-                    int Pomoc1, Pomoc2 ;//potrzebne do przetrzymania pozycji Dresa przed jego ruchem do wyswietlania
-                    Pomoc1 = Seba.pozycja_x;
-                    Pomoc2 = Seba.pozycja_y;
-                    Seba.wstrone(Marek.pozycja_x, Marek.pozycja_y);
-
-                    if (Seba.Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)//sprawdzenie czy dres moze okrasc
-                    {
-                        Akcja++;
-                        Typ_Akcji += "\nKradziez przez Dresa";
-                        Kradziez = Losowy.nextInt(Seba.max_pieniedzy - Seba.min_pieniedzy + 1) + Seba.min_pieniedzy;//losowanie z przedzialu liczby ile kradnie dres
-                        Marek.ilosc_pieniedzy -= Kradziez;//kradziez dresa
-
-                        //wyswietlanie przed ruchem dresa
-                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-                        for (Menel menel : menele)
-                            if (menel != null)
-                                Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                        for (Dres dres : dresy)
-                            if (dres != null)
-                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-                        for (Pieniadze value : pieniadze)
-                            if (value != null)
-                                Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-
-                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                        System.out.println("Przed kradzieza przed ruchem dresa");
-                        Wyswietlanie_Tablicy(Rozmiar);
-                        System.out.println();
-                        Reset(Rozmiar);
-
-                        Typ_Akcji += "\nDres ukradł -> " + Kradziez + "     ruch   " + Ilosc_Ruchow ;
-                        Typ_Akcji += "\nGlownemu bohaterowi zostalo -> " + Marek.ilosc_pieniedzy;
-
-                        if (Marek.ilosc_pieniedzy <= 0)//sprawdzenie czy dres okradl na tyle ze jest koniec gry
-                            break;
-                        Seba.przerwa_od_kradzenia = 7;//ustawienie przerwy dla dresa zeby nie chodzil za MC i kradl go caly czas
-                    }
-                }
-                else
-                {
-                    if(Seba.przerwa_od_kradzenia != 0)
-                        Seba.przerwa_od_kradzenia--;
-                    Seba.Poruszanie_sie(Rozmiar);
-                }
-            }
+//
+//
+//            //ruch dresa
+//            if(Seba != null) {
+//                if (Ilosc_Ruchow == 1 && Seba.Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)//sprawdzenie czy dres moze okrasc glownego bohatera
+//                {
+//                    Akcja++;
+//                    Typ_Akcji += "\nKradziez przez Dresa";
+//                    Kradziez = Losowy.nextInt(Seba.max_pieniedzy - Seba.min_pieniedzy + 1) + Seba.min_pieniedzy;//losowanie z przedzialu liczby ile kradnie dres
+//                    Marek.ilosc_pieniedzy -= Kradziez;//kradziez dresa
+//
+//
+//                    Typ_Akcji += "\nDres ukradł -> " + Kradziez + "     ruch   " + Ilosc_Ruchow;
+//                    Typ_Akcji += "\nGlownemu bohaterowi zostalo -> " + Marek.ilosc_pieniedzy;
+//
+//
+//                    Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
+//                    for (Menel menel : menele)
+//                        if (menel != null)
+//                            Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
+//                    for (Dres dres : dresy)
+//                        if (dres != null)
+//                            Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
+//                    for (Pieniadze value : pieniadze)
+//                        if (value != null)
+//                            Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
+//                    Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
+//                    Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+//                    System.out.println("Przed kradzieza po ruchu dresa");
+//                    Wyswietlanie_Tablicy(Rozmiar);
+//                    System.out.println();
+//                    Reset(Rozmiar);
+//
+//                    if (Marek.ilosc_pieniedzy <= 0)//sprawdzenie czy dres okradl na tyle ze jest koniec gry
+//                        break;
+//                    Seba.przerwa_od_kradzenia = 7;//ustawienie przerwy dla dresa zeby nie chodzil za MC i kradl go caly czas
+//                }
+//                else if(Seba.Czy_widzi_cos(Marek.pozycja_x, Marek.pozycja_y) == 1)
+//                {
+//                    int Pomoc1, Pomoc2 ;//potrzebne do przetrzymania pozycji Dresa przed jego ruchem do wyswietlania
+//                    Pomoc1 = Seba.pozycja_x;
+//                    Pomoc2 = Seba.pozycja_y;
+//                    Seba.wstrone(Marek.pozycja_x, Marek.pozycja_y);
+//
+//                    if (Seba.Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)//sprawdzenie czy dres moze okrasc
+//                    {
+//                        Akcja++;
+//                        Typ_Akcji += "\nKradziez przez Dresa";
+//                        Kradziez = Losowy.nextInt(Seba.max_pieniedzy - Seba.min_pieniedzy + 1) + Seba.min_pieniedzy;//losowanie z przedzialu liczby ile kradnie dres
+//                        Marek.ilosc_pieniedzy -= Kradziez;//kradziez dresa
+//
+//                        //wyswietlanie przed ruchem dresa
+//                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
+//                        for (Menel menel : menele)
+//                            if (menel != null)
+//                                Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
+//                        for (Dres dres : dresy)
+//                            if (dres != null)
+//                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
+//                        for (Pieniadze value : pieniadze)
+//                            if (value != null)
+//                                Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
+//
+//                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
+//                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+//                        System.out.println("Przed kradzieza przed ruchem dresa");
+//                        Wyswietlanie_Tablicy(Rozmiar);
+//                        System.out.println();
+//                        Reset(Rozmiar);
+//
+//                        Typ_Akcji += "\nDres ukradł -> " + Kradziez + "     ruch   " + Ilosc_Ruchow ;
+//                        Typ_Akcji += "\nGlownemu bohaterowi zostalo -> " + Marek.ilosc_pieniedzy;
+//
+//                        if (Marek.ilosc_pieniedzy <= 0)//sprawdzenie czy dres okradl na tyle ze jest koniec gry
+//                            break;
+//                        Seba.przerwa_od_kradzenia = 7;//ustawienie przerwy dla dresa zeby nie chodzil za MC i kradl go caly czas
+//                    }
+//                }
+//                else
+//                {
+//                    if(Seba.przerwa_od_kradzenia != 0)
+//                        Seba.przerwa_od_kradzenia--;
+//                    Seba.Poruszanie_sie(Rozmiar);
+//                }
+//            }
 
 
             for(int j = 0; j < menele.length;j++)
