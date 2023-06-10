@@ -125,10 +125,8 @@ public class Main {
         System.out.println("Mapa wyglada tak:");
         Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
         for (Menel menel : menele)
-            if (menel != null)
                 Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
         for (Dres dres : dresy)
-            if (dres != null)
                 Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
         for (Pieniadze value : pieniadze)
                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
@@ -174,8 +172,9 @@ public class Main {
                         for (Menel menel : menele)
                             if (menel != null)
                                 Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                        if(Seba != null)
-                            Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+                        for (Dres dres : dresy)
+                            if (dres != null)
+                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
                         for (Pieniadze value : pieniadze) {
                             if (value != null)
                                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
@@ -223,8 +222,9 @@ public class Main {
                         for (Menel menel : menele)
                             if (menel != null)
                                 Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                        if(Seba != null)
-                            Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+                        for (Dres dres : dresy)
+                            if (dres != null)
+                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
                         for (Pieniadze value : pieniadze)
                             if (value != null)
                                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
@@ -248,6 +248,96 @@ public class Main {
                     Marek.Poruszanie_sie(Rozmiar);
             }
 
+
+            for(int i = 0; i < dresy.length;i++)
+            {
+                if(dresy[i] != null)
+                {
+                    if(dresy[i].Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)
+                    {
+                        Akcja++;
+                        Typ_Akcji += "\nKradziez przez Dresa";
+                        Kradziez = Losowy.nextInt(dresy[i].max_pieniedzy - dresy[i].min_pieniedzy + 1) + dresy[i].min_pieniedzy;//losowanie z przedzialu liczby ile kradnie dres
+                        Marek.ilosc_pieniedzy -= Kradziez;//kradziez dresa
+
+
+                        Typ_Akcji += "\nDres ukradł -> " + Kradziez + "     ruch   " + Ilosc_Ruchow;
+                        Typ_Akcji += "\nGlownemu bohaterowi zostalo -> " + Marek.ilosc_pieniedzy;
+
+
+                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
+                        for (Menel menel : menele)
+                            if (menel != null)
+                                Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
+                        for (Dres dres : dresy)
+                            if (dres != null)
+                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
+                        for (Pieniadze value : pieniadze)
+                            if (value != null)
+                                Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
+                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
+                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+                        System.out.println("Przed kradzieza dresa");
+                        Wyswietlanie_Tablicy(Rozmiar);
+                        System.out.println();
+                        Reset(Rozmiar);
+
+                        if (Marek.ilosc_pieniedzy <= 0)//sprawdzenie czy dres okradl na tyle ze jest koniec gry
+                            break;
+                        dresy[i].przerwa_od_kradzenia = 7;//ustawienie przerwy dla dresa zeby nie chodzil za MC i kradl go caly czas
+                        dresy[i].Poruszanie_sie(Rozmiar);
+                    }
+                    else if(dresy[i].Czy_widzi_cos(Marek.pozycja_x, Marek.pozycja_y) == 1)
+                    {
+                        Akcja++;
+                        Typ_Akcji += "\nRuch Dresa w strone Glownego Bohatera";
+
+                        dresy[i].wstrone(Marek.pozycja_x, Marek.pozycja_y);
+                        if(dresy[i].Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)
+                        {
+                            Akcja++;
+                            Typ_Akcji += "\nKradziez przez Dresa";
+                            Kradziez = Losowy.nextInt(dresy[i].max_pieniedzy - dresy[i].min_pieniedzy + 1) + dresy[i].min_pieniedzy;//losowanie z przedzialu liczby ile kradnie dres
+                            Marek.ilosc_pieniedzy -= Kradziez;//kradziez dresa
+
+
+                            Typ_Akcji += "\nDres ukradł -> " + Kradziez + "     ruch   " + Ilosc_Ruchow;
+                            Typ_Akcji += "\nGlownemu bohaterowi zostalo -> " + Marek.ilosc_pieniedzy;
+
+
+                            Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
+                            for (Menel menel : menele)
+                                if (menel != null)
+                                    Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
+                            for (Dres dres : dresy)
+                                if (dres != null)
+                                    Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
+                            for (Pieniadze value : pieniadze)
+                                if (value != null)
+                                    Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
+                            Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
+                            Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+                            System.out.println("Przed kradzieza dresa");
+                            Wyswietlanie_Tablicy(Rozmiar);
+                            System.out.println();
+                            Reset(Rozmiar);
+
+                            if (Marek.ilosc_pieniedzy <= 0)//sprawdzenie czy dres okradl na tyle ze jest koniec gry
+                                break;
+                            dresy[i].przerwa_od_kradzenia = 7;//ustawienie przerwy dla dresa zeby nie chodzil za MC i kradl go caly czas
+                            dresy[i].Poruszanie_sie(Rozmiar);
+                        }
+                    }
+                    else
+                    {
+                        dresy[i].Poruszanie_sie(Rozmiar);
+                        dresy[i].przerwa_od_kradzenia--;
+                    }
+                }
+            }
+
+
+
             //ruch dresa
             if(Seba != null) {
                 if (Ilosc_Ruchow == 1 && Seba.Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)//sprawdzenie czy dres moze okrasc glownego bohatera
@@ -266,7 +356,9 @@ public class Main {
                     for (Menel menel : menele)
                         if (menel != null)
                             Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                    Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+                    for (Dres dres : dresy)
+                        if (dres != null)
+                            Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
                     for (Pieniadze value : pieniadze)
                         if (value != null)
                             Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
@@ -281,7 +373,7 @@ public class Main {
                         break;
                     Seba.przerwa_od_kradzenia = 7;//ustawienie przerwy dla dresa zeby nie chodzil za MC i kradl go caly czas
                 }
-                else if(Seba.Czy_widzi_cos2(Marek.pozycja_x, Marek.pozycja_y) == 1)
+                else if(Seba.Czy_widzi_cos(Marek.pozycja_x, Marek.pozycja_y) == 1)
                 {
                     int Pomoc1, Pomoc2 ;//potrzebne do przetrzymania pozycji Dresa przed jego ruchem do wyswietlania
                     Pomoc1 = Seba.pozycja_x;
@@ -300,7 +392,9 @@ public class Main {
                         for (Menel menel : menele)
                             if (menel != null)
                                 Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                        Dodawanie(Seba.GimmeType(), Pomoc1, Pomoc2);
+                        for (Dres dres : dresy)
+                            if (dres != null)
+                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
                         for (Pieniadze value : pieniadze)
                             if (value != null)
                                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
@@ -347,8 +441,9 @@ public class Main {
                         for (Menel menel : menele)
                             if (menel != null)
                                 Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                        if (Seba != null)
-                            Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+                        for (Dres dres : dresy)
+                            if (dres != null)
+                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
                         for (Pieniadze value : pieniadze)
                             if (value != null)
                                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
@@ -376,8 +471,9 @@ public class Main {
                                 for (Menel menel : menele)
                                     if (menel != null)
                                         Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                                if (Seba != null)
-                                    Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+                                for (Dres dres : dresy)
+                                    if (dres != null)
+                                        Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
                                 for (Pieniadze value : pieniadze)
                                     if (value != null)
                                         Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
@@ -409,8 +505,9 @@ public class Main {
                                 for (Menel menel : menele)
                                     if (menel != null)
                                         Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                                if (Seba != null)
-                                    Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+                                for (Dres dres : dresy)
+                                    if (dres != null)
+                                        Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
                                 for (Pieniadze value : pieniadze)
                                     if (value != null)
                                         Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
@@ -451,7 +548,9 @@ public class Main {
                             for (Menel menel : menele)
                                 if (menel != null)
                                     Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                            Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+                            for (Dres dres : dresy)
+                                if (dres != null)
+                                    Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
                             for (Pieniadze value : pieniadze)
                                 if (value != null)
                                     Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
@@ -471,7 +570,9 @@ public class Main {
                             for (Menel menel : menele)
                                 if (menel != null)
                                     Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                            Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+                            for (Dres dres : dresy)
+                                if (dres != null)
+                                    Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
                             for (Pieniadze value : pieniadze)
                                 if (value != null)
                                     Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
@@ -526,8 +627,9 @@ public class Main {
                         for (Menel menel : menele)
                             if (menel != null)
                                 Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                        if(Seba != null)
-                            Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+                        for (Dres dres : dresy)
+                            if (dres != null)
+                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
                         for (Pieniadze value : pieniadze)
                             if (value != null)
                                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
@@ -562,8 +664,9 @@ public class Main {
             for (Menel menel : menele)
                 if (menel != null)
                     Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-            if(Seba != null)
-                Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+            for (Dres dres : dresy)
+                if (dres != null)
+                    Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
             for (Pieniadze value : pieniadze)
                 if (value != null)
                     Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
@@ -587,8 +690,9 @@ public class Main {
         for (Menel menel : menele)
             if (menel != null)
                 Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-        if(Seba != null)
-            Dodawanie(Seba.GimmeType(), Seba.Gimmex(), Seba.Gimmey());
+        for (Dres dres : dresy)
+            if (dres != null)
+                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
         for (Pieniadze value : pieniadze)
             if (value != null)
                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
