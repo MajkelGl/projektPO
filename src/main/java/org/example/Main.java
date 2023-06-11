@@ -966,6 +966,7 @@ public class Main {
                 else {
                     System.out.println("okradzenie");
                     zapis.write("3" + " " + Ilosc_Ruchow + " 0" + "\n");
+                    //huh
                 }
                 System.out.println("koniecgry,    ilosc ruchow -> " + Ilosc_Ruchow);
                 zapis.close();
