@@ -95,10 +95,12 @@ public class Main {
             dresy[i] = new Dres(Losowy.nextInt(Rozmiar),Losowy.nextInt(Rozmiar),10,5,0);
 
         //implementacja klucza
-        Klucz Key = new Klucz(Losowy.nextInt(Rozmiar), Losowy.nextInt(Rozmiar));
+        Klucz Klucz = new Klucz(Losowy.nextInt(Rozmiar), Losowy.nextInt(Rozmiar));
 
         //implementacja policjanta
-        Policjant Policjant = new Policjant(Losowy.nextInt(Rozmiar), Losowy.nextInt(Rozmiar), 2);
+        Policjant[] Policjant = new Policjant[5];
+        for(int i = 0; i < Policjant.length;i++)
+            Policjant[i] = new Policjant(Losowy.nextInt(Rozmiar),Losowy.nextInt(Rozmiar),2);
 
         //element zliczający ile ruchów trwała gra
         int Ilosc_Ruchow = 0;
@@ -128,8 +130,9 @@ public class Main {
                 Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
         for (Pieniadze value : pieniadze)
                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+        for (org.example.Policjant policjant : Policjant)
+            Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+        Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
         Wyswietlanie_Tablicy(Rozmiar);
         System.out.println();
         Reset(Rozmiar);
@@ -137,10 +140,10 @@ public class Main {
 
             Ilosc_Ruchow++;
             //sprawdzenie czy glowny bohater moze podniesc klucz jezeli tak to koniec gry
-            if(Marek.Czy_moze_podniesc_klucz(Key.pozycja_x,Key.pozycja_y) == 1)
+            if(Marek.Czy_moze_podniesc_klucz(Klucz.pozycja_x,Klucz.pozycja_y) == 1)
             {
                 Akcja++;
-                Key = null;
+                Klucz = null;
                 Typ_Akcji += "\nPodniesienie klucza przez Glownego Bohatera";
                 Ktory = 1;
                 break;
@@ -148,14 +151,14 @@ public class Main {
             //jak glowny bohater nie moze podniesc klucza to sprawdzenie czy go widzi
             //jak tak to poruszanie sie w strone klucza
             //a po ruchu ponowne sprawdzenie czy moze podniesc klucz
-            else if(Marek.Czy_widzi_klucz(Key.pozycja_x, Key.pozycja_y) == 1) {
-                Marek.w_strone(Key.pozycja_x, Key.pozycja_y);
+            else if(Marek.Czy_widzi_klucz(Klucz.pozycja_x, Klucz.pozycja_y) == 1) {
+                Marek.w_strone(Klucz.pozycja_x, Klucz.pozycja_y);
                 Akcja++;
                 Typ_Akcji += "\nRuch w strone klucza przez Glownego Bohatera";
 
-                if (Marek.Czy_moze_podniesc_klucz(Key.pozycja_x, Key.pozycja_y) == 1) {
+                if (Marek.Czy_moze_podniesc_klucz(Klucz.pozycja_x, Klucz.pozycja_y) == 1) {
                     Typ_Akcji += "\nPodniesienie klucza przez Glownego Bohatera";
-                    Key = null;
+                    Klucz = null;
                     Ktory = 1;
                     break;
                 }
@@ -177,8 +180,9 @@ public class Main {
                             if (value != null)
                                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
                         }
-                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+                        for (org.example.Policjant policjant : Policjant)
+                            Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+                        Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
                         System.out.println("Przed podniesieniem Pieniadza przez Glownego Bohatera");
                         Wyswietlanie_Tablicy(Rozmiar);
                         System.out.println();
@@ -226,8 +230,9 @@ public class Main {
                         for (Pieniadze value : pieniadze)
                             if (value != null)
                                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+                        for (org.example.Policjant policjant : Policjant)
+                            Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+                        Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
                         System.out.println("Przed podniesieniem Pieniadza przez Glownego Bohatera");
                         Wyswietlanie_Tablicy(Rozmiar);
                         System.out.println();
@@ -273,8 +278,9 @@ public class Main {
                         for (Pieniadze value : pieniadze)
                             if (value != null)
                                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+                        for (org.example.Policjant policjant : Policjant)
+                            Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+                        Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
                         System.out.println("Przed kradzieza dresa");
                         Wyswietlanie_Tablicy(Rozmiar);
                         System.out.println();
@@ -313,8 +319,9 @@ public class Main {
                             for (Pieniadze value : pieniadze)
                                 if (value != null)
                                     Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                            Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                            Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+                            for (org.example.Policjant policjant : Policjant)
+                                Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+                            Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
                             System.out.println("Przed kradzieza dresa");
                             Wyswietlanie_Tablicy(Rozmiar);
                             System.out.println();
@@ -363,8 +370,9 @@ public class Main {
                         for (Pieniadze value : pieniadze)
                             if (value != null)
                                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+                        for (org.example.Policjant policjant : Policjant)
+                            Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+                        Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
                         System.out.println("Przed kradzieza przez menela");
                         Wyswietlanie_Tablicy(Rozmiar);
                         System.out.println();
@@ -395,8 +403,9 @@ public class Main {
                                 for (Pieniadze value : pieniadze)
                                     if (value != null)
                                         Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                                Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                                Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+                                for (org.example.Policjant policjant : Policjant)
+                                    Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+                                Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
                                 System.out.println("Przed podniesieniem pieniadza przez menela");
                                 Wyswietlanie_Tablicy(Rozmiar);
                                 System.out.println();
@@ -429,8 +438,9 @@ public class Main {
                                 for (Pieniadze value : pieniadze)
                                     if (value != null)
                                         Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                                Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                                Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+                                for (org.example.Policjant policjant : Policjant)
+                                    Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+                                Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
                                 System.out.println("Przed podniesieniem pieniadza przez menela");
                                 Wyswietlanie_Tablicy(Rozmiar);
                                 System.out.println();
@@ -447,221 +457,16 @@ public class Main {
 
             //trzeba dorzucic warunek aresztowania na poczatku czy policjant moze aresztowac przed ruchem kogos
 
+
+            //ruch policjanta
             int pomoc1, pomoc2;//wartosci potrzebne do wyswietlenia sytuacji przed ruchem policjanta
-            if(Ilosc_Ruchow == 1) {
-                //na samym poczatku sprawdzenie czy od razu moze kogos aresztowac
-                for (int i = 0; i < dresy.length; i++) {
-                    if (dresy[i] != null && Policjant.Czy_moze_aresztowac(dresy[i].pozycja_x, dresy[i].pozycja_y) == 1) {
-                        Akcja++;
-                        Typ_Akcji += "Aresztowanie dresa";
-                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-                        for (Menel menel : menele)
-                            if (menel != null)
-                                Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                        for (Dres dres : dresy)
-                            if (dres != null)
-                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-                        for (Pieniadze value : pieniadze)
-                            if (value != null)
-                                Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                        System.out.println("Przed aresztowaniem Dresa przed ruchem policjanta");
-                        Wyswietlanie_Tablicy(Rozmiar);
-                        System.out.println();
-                        Reset(Rozmiar);
-
-                        dresy[i] = null;
-                    }
-                }
-                //to samo sprawdzenie dla meneli aresztowanie
-                for (int i = 0; i < menele.length; i++) {
-                    if (menele[i] != null && Policjant.Czy_moze_aresztowac(menele[i].pozycja_x, menele[i].pozycja_y) == 1) {
-                        Akcja++;
-                        Typ_Akcji += "Aresztowanie menela";
-
-                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-                        for (Menel menel : menele)
-                            if (menel != null)
-                                Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                        for (Dres dres : dresy)
-                            if (dres != null)
-                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-                        for (Pieniadze value : pieniadze)
-                            if (value != null)
-                                Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                        System.out.println("Przed aresztowaniem Menela przed ruchem policjanta");
-                        Wyswietlanie_Tablicy(Rozmiar);
-                        System.out.println();
-                        Reset(Rozmiar);
-
-                        menele[i] = null;
-                    }
-                }
-
-
-                //wyliczanie odleglosci do najblizszego dresa
-                int odlegloscdres = 2147483647, liczbadres = -1;
-                for (int i = 0; i < dresy.length; i++) {
-                    if (dresy[i] != null && Policjant.Czy_widzi_dresa_lub_menela(dresy[i].pozycja_x, dresy[i].pozycja_y) == 1) {
-                        tymcz_odlegl = (dresy[i].pozycja_x - Policjant.pozycja_x) * (dresy[i].pozycja_x - Policjant.pozycja_x) + (dresy[i].pozycja_y - Policjant.pozycja_y) * (dresy[i].pozycja_y - Policjant.pozycja_y);
-                        if (tymcz_odlegl < odlegloscdres) {
-                            odlegloscdres = tymcz_odlegl;
-                            liczbadres = i;
-                        }
-                    }
-                }
-
-
-                //wyliczanie odleglosci do najblizszego menela
-                int odlegloscmenel = 2147483647, liczbamenel = -1;
-                for (int i = 0; i < menele.length; i++) {
-                    if (menele[i] != null && Policjant.Czy_widzi_dresa_lub_menela(menele[i].pozycja_x, menele[i].pozycja_y) == 1) {
-                        tymcz_odlegl = (menele[i].pozycja_x - Policjant.pozycja_x) * (menele[i].pozycja_x - Policjant.pozycja_x) + (menele[i].pozycja_y - Policjant.pozycja_y) * (menele[i].pozycja_y - Policjant.pozycja_y);
-                        if (tymcz_odlegl < odlegloscmenel) {
-                            odlegloscmenel = tymcz_odlegl;
-                            liczbamenel = i;
-                        }
-                    }
-                }
-
-                //uzaleznienie ruchu policjanta od odleglosci od menela/dresa jednak gdy taka sama odleglosc to idzie do dresa
-                if (liczbamenel == -1 && liczbadres == -1) {
-                    Policjant.Poruszanie_sie(Rozmiar);
-                } else if (odlegloscmenel < odlegloscdres) {
-                    Akcja++;
-                    Typ_Akcji += "Ruch Policjanta w strone Menela";
-                    pomoc1 = Policjant.pozycja_x;
-                    pomoc2 = Policjant.pozycja_y;
-                    Policjant.w_strone(menele[liczbamenel].pozycja_x, menele[liczbamenel].pozycja_y);
-                    if (Policjant.Czy_moze_aresztowac(menele[liczbamenel].pozycja_x, menele[liczbamenel].pozycja_y) == 1) {
-                        Akcja++;
-                        Typ_Akcji += "Aresztowanie Menala";
-                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-                        for (Menel menel : menele)
-                            if (menel != null)
-                                Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                        for (Dres dres : dresy)
-                            if (dres != null)
-                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-                        for (Pieniadze value : pieniadze)
-                            if (value != null)
-                                Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                        Dodawanie(Policjant.GimmeType(), pomoc1, pomoc2);
-                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                        System.out.println("Przed aresztowaniem Menela przed ruchem policjanta");
-                        Wyswietlanie_Tablicy(Rozmiar);
-                        System.out.println();
-                        Reset(Rozmiar);
-
-                        menele[liczbamenel] = null;
-
-                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-                        for (Menel menel : menele)
-                            if (menel != null)
-                                Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                        for (Dres dres : dresy)
-                            if (dres != null)
-                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-                        for (Pieniadze value : pieniadze)
-                            if (value != null)
-                                Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                        System.out.println("Przed aresztowaniem Menela po ruchu policjanta");
-                        Wyswietlanie_Tablicy(Rozmiar);
-                        System.out.println();
-                        Reset(Rozmiar);
-                    }
-                } else {
-                    Akcja++;
-                    Typ_Akcji += "Ruch Policjanta w strone Dresa";
-                    pomoc1 = Policjant.pozycja_x;
-                    pomoc2 = Policjant.pozycja_y;
-                    Policjant.w_strone(menele[liczbadres].pozycja_x, menele[liczbadres].pozycja_y);
-                    if (Policjant.Czy_moze_aresztowac(menele[liczbadres].pozycja_x, menele[liczbadres].pozycja_y) == 1) {
-                        Akcja++;
-                        Typ_Akcji += "Aresztowanie dresa";
-
-                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-                        for (Menel menel : menele)
-                            if (menel != null)
-                                Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                        for (Dres dres : dresy)
-                            if (dres != null)
-                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-                        for (Pieniadze value : pieniadze)
-                            if (value != null)
-                                Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                        Dodawanie(Policjant.GimmeType(), pomoc1, pomoc2);
-                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                        System.out.println("Przed aresztowaniem Menela przed ruchem policjanta");
-                        Wyswietlanie_Tablicy(Rozmiar);
-                        System.out.println();
-                        Reset(Rozmiar);
-
-                        dresy[liczbadres] = null;
-
-                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-                        for (Menel menel : menele)
-                            if (menel != null)
-                                Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-                        for (Dres dres : dresy)
-                            if (dres != null)
-                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-                        for (Pieniadze value : pieniadze)
-                            if (value != null)
-                                Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                        System.out.println("Przed aresztowaniem Menela po ruchu policjanta");
-                        Wyswietlanie_Tablicy(Rozmiar);
-                        System.out.println();
-                        Reset(Rozmiar);
-                    }
-                }
-            }
-            else
-            {
-                //wyliczanie odleglosci do najblizszego dresa
-                int odlegloscdres = 2147483647, liczbadres = -1;
-                for (int i = 0; i < dresy.length; i++) {
-                    if (dresy[i] != null && Policjant.Czy_widzi_dresa_lub_menela(dresy[i].pozycja_x, dresy[i].pozycja_y) == 1) {
-                        tymcz_odlegl = (dresy[i].pozycja_x - Policjant.pozycja_x) * (dresy[i].pozycja_x - Policjant.pozycja_x) + (dresy[i].pozycja_y - Policjant.pozycja_y) * (dresy[i].pozycja_y - Policjant.pozycja_y);
-                        if (tymcz_odlegl < odlegloscdres) {
-                            odlegloscdres = tymcz_odlegl;
-                            liczbadres = i;
-                        }
-                    }
-                }
-
-
-                //wyliczanie odleglosci do najblizszego menela
-                int odlegloscmenel = 2147483647, liczbamenel = -1;
-                for (int i = 0; i < menele.length; i++) {
-                    if (menele[i] != null && Policjant.Czy_widzi_dresa_lub_menela(menele[i].pozycja_x, menele[i].pozycja_y) == 1) {
-                        tymcz_odlegl = (menele[i].pozycja_x - Policjant.pozycja_x) * (menele[i].pozycja_x - Policjant.pozycja_x) + (menele[i].pozycja_y - Policjant.pozycja_y) * (menele[i].pozycja_y - Policjant.pozycja_y);
-                        if (tymcz_odlegl < odlegloscmenel) {
-                            odlegloscmenel = tymcz_odlegl;
-                            liczbamenel = i;
-                        }
-                    }
-                }
-
-                    //uzaleznienie ruchu policjanta od odleglosci od menela/dresa jednak gdy taka sama odleglosc to idzie do dresa
-                    if (liczbamenel == -1 && liczbadres == -1)
-                        Policjant.Poruszanie_sie(Rozmiar);
-                    else if (odlegloscmenel < odlegloscdres) {
-                        Akcja++;
-                        Typ_Akcji += "Ruch Policjanta w strone Menela";
-                        pomoc1 = Policjant.pozycja_x;
-                        pomoc2 = Policjant.pozycja_y;
-                        Policjant.w_strone(menele[liczbamenel].pozycja_x, menele[liczbamenel].pozycja_y);
-                        if (Policjant.Czy_moze_aresztowac(menele[liczbamenel].pozycja_x, menele[liczbamenel].pozycja_y) == 1) {
+            for(int p = 0; p < Policjant.length;p++) {
+                if (Ilosc_Ruchow == 1) {
+                    //na samym poczatku sprawdzenie czy od razu moze kogos aresztowac
+                    for (int i = 0; i < dresy.length; i++) {
+                        if (dresy[i] != null && Policjant[p].Czy_moze_aresztowac(dresy[i].pozycja_x, dresy[i].pozycja_y) == 1) {
                             Akcja++;
-                            Typ_Akcji += "Aresztowanie Menala";
+                            Typ_Akcji += "\nAresztowanie dresa";
                             Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
                             for (Menel menel : menele)
                                 if (menel != null)
@@ -672,41 +477,145 @@ public class Main {
                             for (Pieniadze value : pieniadze)
                                 if (value != null)
                                     Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                            Dodawanie(Policjant.GimmeType(), pomoc1, pomoc2);
-                            Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+                            for (org.example.Policjant policjant : Policjant)
+                                Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+                            Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
+                            System.out.println("Przed aresztowaniem Dresa przed ruchem policjanta pierwszy ruch");
+                            Wyswietlanie_Tablicy(Rozmiar);
+                            System.out.println();
+                            Reset(Rozmiar);
+
+                            dresy[i] = null;
+                        }
+                    }
+                    //to samo sprawdzenie dla meneli aresztowanie
+                    for (int i = 0; i < menele.length; i++) {
+                        if (menele[i] != null && Policjant[p].Czy_moze_aresztowac(menele[i].pozycja_x, menele[i].pozycja_y) == 1) {
+                            Akcja++;
+                            Typ_Akcji += "\nAresztowanie menela";
+
+                            Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
+                            for (Menel menel : menele)
+                                if (menel != null)
+                                    Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
+                            for (Dres dres : dresy)
+                                if (dres != null)
+                                    Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
+                            for (Pieniadze value : pieniadze)
+                                if (value != null)
+                                    Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
+                            for (org.example.Policjant policjant : Policjant)
+                                Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+                            Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
+                            System.out.println("Przed aresztowaniem Menela przed ruchem policjanta pierwszy ruch");
+                            Wyswietlanie_Tablicy(Rozmiar);
+                            System.out.println();
+                            Reset(Rozmiar);
+
+                            menele[i] = null;
+                        }
+                    }
+                } else {
+                    //wyliczanie odleglosci do najblizszego dresa
+                    int odlegloscdres = 2147483647, liczbadres = -1;
+                    for (int i = 0; i < dresy.length; i++) {
+                        if (dresy[i] != null && Policjant[p].Czy_widzi_dresa_lub_menela(dresy[i].pozycja_x, dresy[i].pozycja_y) == 1) {
+                            tymcz_odlegl = (dresy[i].pozycja_x - Policjant[p].pozycja_x) * (dresy[i].pozycja_x - Policjant[p].pozycja_x) + (dresy[i].pozycja_y - Policjant[p].pozycja_y) * (dresy[i].pozycja_y - Policjant[p].pozycja_y);
+                            if (tymcz_odlegl < odlegloscdres) {
+                                odlegloscdres = tymcz_odlegl;
+                                liczbadres = i;
+                            }
+                        }
+                    }
+
+
+                    //wyliczanie odleglosci do najblizszego menela
+                    int odlegloscmenel = 2147483647, liczbamenel = -1;
+                    for (int i = 0; i < menele.length; i++) {
+                        if (menele[i] != null && Policjant[p].Czy_widzi_dresa_lub_menela(menele[i].pozycja_x, menele[i].pozycja_y) == 1) {
+                            tymcz_odlegl = (menele[i].pozycja_x - Policjant[p].pozycja_x) * (menele[i].pozycja_x - Policjant[p].pozycja_x) + (menele[i].pozycja_y - Policjant[p].pozycja_y) * (menele[i].pozycja_y - Policjant[p].pozycja_y);
+                            if (tymcz_odlegl < odlegloscmenel) {
+                                odlegloscmenel = tymcz_odlegl;
+                                liczbamenel = i;
+                            }
+                        }
+                    }
+
+                    //uzaleznienie ruchu policjanta od odleglosci od menela/dresa jednak gdy taka sama odleglosc to idzie do dresa
+                    if (liczbamenel == -1 && liczbadres == -1)
+                        Policjant[p].Poruszanie_sie(Rozmiar);
+                    else if (odlegloscmenel < odlegloscdres) {
+                        Akcja++;
+                        Typ_Akcji += "\nRuch Policjanta w strone Menela";
+                        pomoc1 = Policjant[p].pozycja_x;
+                        pomoc2 = Policjant[p].pozycja_y;
+                        Policjant[p].w_strone(menele[liczbamenel].pozycja_x, menele[liczbamenel].pozycja_y);
+                        if (Policjant[p].Czy_moze_aresztowac(menele[liczbamenel].pozycja_x, menele[liczbamenel].pozycja_y) == 1) {
+                            Akcja++;
+                            Typ_Akcji += "\nAresztowanie Menala";
+                            Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
+                            for (Menel menel : menele)
+                                if (menel != null)
+                                    Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
+                            for (Dres dres : dresy)
+                                if (dres != null)
+                                    Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
+                            for (Pieniadze value : pieniadze)
+                                if (value != null)
+                                    Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
+                            for(int j = 0; j < Policjant.length;j++)
+                                if(j != p)
+                                    Dodawanie(Policjant[j].GimmeType(), Policjant[j].Gimmex(), Policjant[j].Gimmey());
+                            Dodawanie(Policjant[p].GimmeType(), pomoc1, pomoc2);
+                            Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
                             System.out.println("Przed aresztowaniem Menela przed ruchem policjanta");
+                            Wyswietlanie_Tablicy(Rozmiar);
+                            System.out.println();
+                            Reset(Rozmiar);
+
+                            Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
+                            for (Menel menel : menele)
+                                if (menel != null)
+                                    Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
+                            for (Dres dres : dresy)
+                                if (dres != null)
+                                    Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
+                            for (Pieniadze value : pieniadze)
+                                if (value != null)
+                                    Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
+                            for (org.example.Policjant policjant : Policjant)
+                                Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+                            Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
+                            System.out.println("Przed aresztowaniem Menela po ruchu policjanta");
                             Wyswietlanie_Tablicy(Rozmiar);
                             System.out.println();
                             Reset(Rozmiar);
 
                             menele[liczbamenel] = null;
 
-                            Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
+                            int il_meneli = 0, il_dresow = 0;
                             for (Menel menel : menele)
                                 if (menel != null)
-                                    Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
+                                    il_meneli++;
                             for (Dres dres : dresy)
                                 if (dres != null)
-                                    Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-                            for (Pieniadze value : pieniadze)
-                                if (value != null)
-                                    Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                            Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                            Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                            System.out.println("Przed aresztowaniem Menela po ruchu policjanta");
-                            Wyswietlanie_Tablicy(Rozmiar);
-                            System.out.println();
-                            Reset(Rozmiar);
+                                    il_dresow++;
+
+                            if(il_dresow == 0 && il_meneli == 0)
+                            {
+                                Ktory = 2;
+                                break;
+                            }
                         }
                     } else {
                         Akcja++;
-                        Typ_Akcji += "Ruch Policjanta w strone Dresa";
-                        pomoc1 = Policjant.pozycja_x;
-                        pomoc2 = Policjant.pozycja_y;
-                        Policjant.w_strone(dresy[liczbadres].pozycja_x, dresy[liczbadres].pozycja_y);
-                        if (Policjant.Czy_moze_aresztowac(dresy[liczbadres].pozycja_x, dresy[liczbadres].pozycja_y) == 1) {
+                        Typ_Akcji += "\nRuch Policjanta w strone Dresa";
+                        pomoc1 = Policjant[p].pozycja_x;
+                        pomoc2 = Policjant[p].pozycja_y;
+                        Policjant[p].w_strone(dresy[liczbadres].pozycja_x, dresy[liczbadres].pozycja_y);
+                        if (Policjant[p].Czy_moze_aresztowac(dresy[liczbadres].pozycja_x, dresy[liczbadres].pozycja_y) == 1) {
                             Akcja++;
-                            Typ_Akcji += "Aresztowanie dresa";
+                            Typ_Akcji += "\nAresztowanie dresa";
 
                             Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
                             for (Menel menel : menele)
@@ -718,184 +627,54 @@ public class Main {
                             for (Pieniadze value : pieniadze)
                                 if (value != null)
                                     Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                            Dodawanie(Policjant.GimmeType(), pomoc1, pomoc2);
-                            Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                            System.out.println("Przed aresztowaniem Menela przed ruchem policjanta");
+                            for(int j = 0; j < Policjant.length;j++)
+                                if(j != p)
+                                    Dodawanie(Policjant[j].GimmeType(), Policjant[j].Gimmex(), Policjant[j].Gimmey());
+                            Dodawanie(Policjant[p].GimmeType(), pomoc1, pomoc2);
+                            Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
+                            System.out.println("Przed aresztowaniem Dresa przed ruchem policjanta");
+                            Wyswietlanie_Tablicy(Rozmiar);
+                            System.out.println();
+                            Reset(Rozmiar);
+
+
+                            Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
+                            for (Menel menel : menele)
+                                if (menel != null)
+                                    Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
+                            for (Dres dres : dresy)
+                                if (dres != null)
+                                    Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
+                            for (Pieniadze value : pieniadze)
+                                if (value != null)
+                                    Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
+                            for (org.example.Policjant policjant : Policjant)
+                                Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+                            Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
+                            System.out.println("Przed aresztowaniem Dresa po ruchu policjanta");
                             Wyswietlanie_Tablicy(Rozmiar);
                             System.out.println();
                             Reset(Rozmiar);
 
                             dresy[liczbadres] = null;
 
-                            Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
+                            int il_meneli = 0, il_dresow = 0;
                             for (Menel menel : menele)
                                 if (menel != null)
-                                    Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
+                                    il_meneli++;
                             for (Dres dres : dresy)
                                 if (dres != null)
-                                    Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-                            for (Pieniadze value : pieniadze)
-                                if (value != null)
-                                    Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-                            Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-                            Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-                            System.out.println("Przed aresztowaniem Menela po ruchu policjanta");
-                            Wyswietlanie_Tablicy(Rozmiar);
-                            System.out.println();
-                            Reset(Rozmiar);
+                                    il_dresow++;
+
+                            if(il_dresow == 0 && il_meneli == 0)
+                            {
+                                Ktory = 2;
+                                break;
+                            }
                         }
                     }
                 }
-
-//            //pozniej ruszanie sie policjanta
-//            if (Seba != null && Policjant.Czy_widzi_dresa_lub_menela(Seba.pozycja_x, Seba.pozycja_y) == 1)
-//                {
-//                    Akcja++;
-//                    Typ_Akcji += "\nPoruszanie sie w strone dresa";
-//
-//                    int Pomoc1, Pomoc2 ;//potrzebne do przetrzymania pozycji policjanta przed jego ruchem do wyswietlania
-//                    Pomoc1 = Policjant.pozycja_x;
-//                    Pomoc2 = Policjant.pozycja_y;
-//                    Policjant.w_strone(Seba.pozycja_x, Seba.pozycja_y);
-//                    if (Policjant.Czy_moze_aresztowac(Seba.pozycja_x, Seba.pozycja_y) == 1)
-//                        {
-//                            //wyswietlanie przed ruchem policjanta
-//                            Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-//                            for (Menel menel : menele)
-//                                if (menel != null)
-//                                    Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-//                            for (Dres dres : dresy)
-//                                if (dres != null)
-//                                    Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-//                            for (Pieniadze value : pieniadze)
-//                                if (value != null)
-//                                    Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-//                            Dodawanie(Policjant.GimmeType(), Pomoc1, Pomoc2);
-//                            Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-//                            System.out.println("Przed aresztowaniem Dresa przed ruchem policjanta");
-//                            Wyswietlanie_Tablicy(Rozmiar);
-//                            System.out.println();
-//                            Reset(Rozmiar);
-//
-//
-//                            Akcja++;
-//                            Typ_Akcji += "\nAresztowanie dresa ";
-//
-//                            //wyswietlanie po ruchu policjanta
-//                            Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-//                            for (Menel menel : menele)
-//                                if (menel != null)
-//                                    Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-//                            for (Dres dres : dresy)
-//                                if (dres != null)
-//                                    Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-//                            for (Pieniadze value : pieniadze)
-//                                if (value != null)
-//                                    Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-//                            Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-//                            Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-//                            System.out.println("Przed aresztowaniem Dresa po ruchu policjanta");
-//                            Wyswietlanie_Tablicy(Rozmiar);
-//                            System.out.println();
-//                            Reset(Rozmiar);
-//
-//
-//                            Seba = null;
-//                            int czy_koniec = 1;
-//                            for(int j = 0; j < menele.length;j++)
-//                                if(menele[j] != null)
-//                                {
-//                                    czy_koniec = 0;
-//                                    break;
-//                                }
-//                            if(czy_koniec == 1 && Seba == null) {
-//                                Ktory = 2;
-//                                break;
-//                            }
-//                        }
-//                }
-//            else
-//            {
-//                odleglosc = 2147483647; //parametry potrzebne do okreslenia ktory menel jest najblizej
-//                liczba = -1;
-//                int pomoc1, pomoc2;//potrzebne do wyswietlenia sytuacji przed ruchem policjanta
-//                pomoc1 = Policjant.pozycja_x;
-//                pomoc2 = Policjant.pozycja_y;
-//                for(int i = 0; i < menele.length;i++)
-//                {
-//                    if(menele[i] != null && Policjant.Czy_widzi_dresa_lub_menela(menele[i].pozycja_x, menele[i].pozycja_y) == 1)
-//                    {
-//                        tymcz_odlegl = (menele[i].pozycja_x - Policjant.pozycja_x)*(menele[i].pozycja_x - Policjant.pozycja_x) + (menele[i].pozycja_y - Policjant.pozycja_y)*(menele[i].pozycja_y - Policjant.pozycja_y);
-//                        if(tymcz_odlegl < odleglosc)
-//                        {
-//                            odleglosc = tymcz_odlegl;
-//                            liczba = i;
-//                        }
-//                    }
-//                }
-//                if(liczba != -1)
-//                {
-//                    Policjant.w_strone(menele[liczba].pozycja_x, menele[liczba].pozycja_y);
-//                    if (Policjant.Czy_moze_aresztowac(menele[liczba].pozycja_x, menele[liczba].pozycja_y) == 1)
-//                    {
-//                        //wyswietlanie przed ruchem policjanta
-//                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-//                        for (Menel menel : menele)
-//                            if (menel != null)
-//                                Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-//                        for (Dres dres : dresy)
-//                            if (dres != null)
-//                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-//                        for (Pieniadze value : pieniadze)
-//                            if (value != null)
-//                                Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-//                        Dodawanie(Policjant.GimmeType(), pomoc1, pomoc2);
-//                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-//                        System.out.println("Przed aresztowaniem Menela przed ruchem policjanta");
-//                        Wyswietlanie_Tablicy(Rozmiar);
-//                        Reset(Rozmiar);
-//                        System.out.println();
-//
-//
-//                        Akcja++;
-//                        Typ_Akcji += "\nAresztowanie menela ";
-//
-//                        //wyswietlanie po ruchu policjanta
-//                        Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
-//                        for (Menel menel : menele)
-//                            if (menel != null)
-//                                Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
-//                        for (Dres dres : dresy)
-//                            if (dres != null)
-//                                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
-//                        for (Pieniadze value : pieniadze)
-//                            if (value != null)
-//                                Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-//                        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-//                        Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
-//                        System.out.println("Przed aresztowaniem Menela po ruchu policjanta");
-//                        Wyswietlanie_Tablicy(Rozmiar);
-//                        Reset(Rozmiar);
-//                        System.out.println();
-//
-//                        menele[liczba] = null;
-//                        int czy_koniec = 1;
-//                        for(int j = 0; j < menele.length;j++)
-//                            if(menele[j] != null)
-//                            {
-//                                czy_koniec = 0;
-//                                break;
-//                            }
-//                        if(czy_koniec == 1 && Seba == null) {
-//                            Ktory = 2;
-//                            break;
-//                        }
-//                    }
-//                }
-//                else
-//                    Policjant.Poruszanie_sie(Rozmiar);
-//            }
-
+            }
 
                 //dodawanie poszczegolnych elementow do tablicy wyswietlajacej
             Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
@@ -908,8 +687,9 @@ public class Main {
             for (Pieniadze value : pieniadze)
                 if (value != null)
                     Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-            Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-            Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+            for (org.example.Policjant policjant : Policjant)
+                Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+            Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
 
             if( Akcja > 0)
                 {
@@ -922,6 +702,8 @@ public class Main {
                 Akcja = 0;
                 Typ_Akcji = "";
                 Reset(Rozmiar);
+                if(Ktory == 1 || Ktory == 2)
+                    break;
         }
 
         Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
@@ -934,9 +716,10 @@ public class Main {
         for (Pieniadze value : pieniadze)
             if (value != null)
                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
-        if(Key != null)
-            Dodawanie(Key.GimmeType(), Key.Gimmex(), Key.Gimmey());
+        for (org.example.Policjant policjant : Policjant)
+            Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
+        if(Klucz != null)
+            Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
 
         if( Akcja > 0)
         {
@@ -953,6 +736,5 @@ public class Main {
                 else
                     System.out.println("okradzenie");
                 System.out.println("koniecgry,    ilosc ruchow -> " + Ilosc_Ruchow);
-                //test
         }
     }
