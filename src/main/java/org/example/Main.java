@@ -1,4 +1,7 @@
 package org.example;
+import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.FileSystemException;
 import java.util.Random;
 
 
@@ -63,7 +66,12 @@ public class Main {
 //        return liczba;
 //    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        //Potrzebne metody do stworzenia pliku i zapisywania do niego wynikow symulacji
+        Writer plik = new FileWriter("wyniki.txt", true );
+        BufferedWriter zapis = new BufferedWriter(plik);
+
+
         Random Losowy = new Random();
         //inicjalizacja rozmiaru planszy
         System.out.println("rozmiar mapy -> 50\n\n");
@@ -946,13 +954,20 @@ public class Main {
             System.out.println();
         }
 
-                if (Ktory == 1)
+                if (Ktory == 1) {
                     System.out.println("zebranie klucza");
-                else if(Ktory == 2)
+                    //Zapis w postaci : 1. Typ zakonczenia gry, 2. Ilosc ruchow, 3. Ilosc posiadanych pieniedzy
+                    zapis.write("1" + " " +  Ilosc_Ruchow + " " + Marek.ilosc_pieniedzy + "\n");
+                }
+                else if(Ktory == 2) {
                     System.out.println("aresztowanie wszystkich meneli i dresow");
-                else
+                    zapis.write("2" + " " + Ilosc_Ruchow + " " + Marek.ilosc_pieniedzy + "\n");
+                }
+                else {
                     System.out.println("okradzenie");
+                    zapis.write("3" + " " + Ilosc_Ruchow + " 0" + "\n");
+                }
                 System.out.println("koniecgry,    ilosc ruchow -> " + Ilosc_Ruchow);
-                //test
+                zapis.close();
         }
     }
