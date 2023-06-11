@@ -1,12 +1,13 @@
 package org.example;
+import java.io.IOException;
 import java.util.Random;
 
 
 public class Main {
 
+
     // Tablica stringow potrzebna do wizualizacji
     static String[][] Pozycje = new String[50][50];
-
 
     // Kolorki :}
     public static final String ANSI_RESET = "\u001B[0m";
@@ -43,16 +44,17 @@ public class Main {
     }
 
     // metoda wyswietlajaca tablice wizualizacyjna
-    public static void Wyswietlanie_Tablicy(int rozmiar)
-    {
+    public static void Wyswietlanie_Tablicy(int rozmiar) throws InterruptedException {
         for( int i = 0; i < rozmiar; i++)
         {
             for( int j = 0; j < rozmiar; j++)
             {
                 System.out.print(Pozycje[i][j]);
+                //Thread.sleep(0,1);
             }
             System.out.println();
         }
+        Thread.sleep(1000);
     }
 
 //    public static int atoi(String wejscie)
@@ -63,7 +65,8 @@ public class Main {
 //        return liczba;
 //    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException{
+
         Random Losowy = new Random();
         //inicjalizacja rozmiaru planszy
         System.out.println("rozmiar mapy -> 50\n\n");
@@ -425,7 +428,7 @@ public class Main {
                             if(pieniadze[i] != null && menele[j].Czy_podniesie_pieniadza(pieniadze[i].pozycja_x,pieniadze[i].pozycja_y) == 1)
                             {
                                 Akcja++;
-                                Typ_Akcji += "Podniesienie pieniadza przez menela";
+                                Typ_Akcji += "\nPodniesienie pieniadza przez menela";
 
                                 //wyswietlanie przed podniesieniem pieniadza
                                 Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
