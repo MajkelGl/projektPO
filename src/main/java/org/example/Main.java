@@ -119,21 +119,21 @@ public class Main {
         Glowny_Bohater Marek = new Glowny_Bohater(Losowy.nextInt(Rozmiar), Losowy.nextInt(Rozmiar), 50, 5);
 
         //implementacja pieniędzy
-        Pieniadze[] pieniadze = new Pieniadze[10];
-        for(int i = 0; i < 10;i++)
+        Pieniadze[] pieniadze = new Pieniadze[3];
+        for(int i = 0; i < 3;i++)
         {
             pieniadze[i] = new Pieniadze(Losowy.nextInt(Rozmiar),Losowy.nextInt(Rozmiar),Losowy.nextInt(30 - 10 + 1) + 10);
         }
 
         //implementacja menela
 
-        Menel[] menele = new Menel[30];
+        Menel[] menele = new Menel[15];
         for(int i = 0; i < menele.length;i++)
             menele[i] = new Menel(Losowy.nextInt(50),Losowy.nextInt(50),5,1);
 
 
         //implementacja dresa
-        Dres[] dresy = new Dres[30];
+        Dres[] dresy = new Dres[15];
         for(int i = 0; i < dresy.length;i++)
             dresy[i] = new Dres(Losowy.nextInt(Rozmiar),Losowy.nextInt(Rozmiar),10,5,0);
 
@@ -141,9 +141,9 @@ public class Main {
         Klucz Klucz = new Klucz(Losowy.nextInt(Rozmiar), Losowy.nextInt(Rozmiar));
 
         //implementacja policjanta
-        Policjant[] Policjant = new Policjant[1];
+        Policjant[] Policjant = new Policjant[2];
         for(int i = 0; i < Policjant.length;i++)
-            Policjant[i] = new Policjant(Losowy.nextInt(Rozmiar),Losowy.nextInt(Rozmiar),2);
+            Policjant[i] = new Policjant(Losowy.nextInt(Rozmiar),Losowy.nextInt(Rozmiar),1);
 
         //element zliczający ile ruchów trwała gra
 //        int Ilosc_Ruchow = 0;
@@ -184,9 +184,9 @@ public class Main {
             Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
         for (org.example.Policjant policjant : Policjant)
             Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
-       // Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-  //      Wyswietlanie_Tablicy(Rozmiar);
-      //  System.out.println();
+//        Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
+//        Wyswietlanie_Tablicy(Rozmiar);
+//        System.out.println();
         Reset(Rozmiar);
 
         while (true) {
@@ -236,9 +236,9 @@ public class Main {
                         for (org.example.Policjant policjant : Policjant)
                             Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
                         Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-                   //     System.out.println("Przed podniesieniem Pieniadza przez Glownego Bohatera");
-   //                     Wyswietlanie_Tablicy(Rozmiar);
-                   //     System.out.println();
+//                        System.out.println("Przed podniesieniem Pieniadza przez Glownego Bohatera");
+//                        Wyswietlanie_Tablicy(Rozmiar);
+//                        System.out.println();
                         Reset(Rozmiar);
 
                         Marek.ilosc_pieniedzy += pieniadze[i].wartosc;
@@ -286,9 +286,9 @@ public class Main {
                         for (org.example.Policjant policjant : Policjant)
                             Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
                         Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-                   //     System.out.println("Przed podniesieniem Pieniadza przez Glownego Bohatera");
-  //                      Wyswietlanie_Tablicy(Rozmiar);
-                    //    System.out.println();
+//                        System.out.println("Przed podniesieniem Pieniadza przez Glownego Bohatera");
+//                        Wyswietlanie_Tablicy(Rozmiar);
+//                        System.out.println();
                         Reset(Rozmiar);
 
                         Marek.ilosc_pieniedzy += pieniadze[liczba].wartosc;
@@ -337,9 +337,9 @@ public class Main {
                         for (org.example.Policjant policjant : Policjant)
                             Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
                         Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-                     //   System.out.println("Przed kradzieza dresa");
-          //              Wyswietlanie_Tablicy(Rozmiar);
-                    //    System.out.println();
+//                        System.out.println("Przed kradzieza dresa");
+//                        Wyswietlanie_Tablicy(Rozmiar);
+//                        System.out.println();
                         Reset(Rozmiar);
 
                         if (Marek.ilosc_pieniedzy <= 0)//sprawdzenie czy dres okradl na tyle ze jest koniec gry
@@ -384,9 +384,9 @@ public class Main {
                             for (org.example.Policjant policjant : Policjant)
                                 Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
                             Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-                     //       System.out.println("Przed kradzieza dresa");
-     //                       Wyswietlanie_Tablicy(Rozmiar);
-                   //         System.out.println();
+//                            System.out.println("Przed kradzieza dresa");
+//                            Wyswietlanie_Tablicy(Rozmiar);
+//                            System.out.println();
                             Reset(Rozmiar);
 
                             if (Marek.ilosc_pieniedzy <= 0)//sprawdzenie czy dres okradl na tyle ze jest koniec gry
@@ -439,9 +439,9 @@ public class Main {
                         for (org.example.Policjant policjant : Policjant)
                             Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
                         Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-                   //     System.out.println("Przed kradzieza przez menela");
-      //                  Wyswietlanie_Tablicy(Rozmiar);
-                    //    System.out.println();
+//                        System.out.println("Przed kradzieza przez menela");
+//                        Wyswietlanie_Tablicy(Rozmiar);
+//                        System.out.println();
                         Reset(Rozmiar);
                         if (Marek.ilosc_pieniedzy <= 0)//sprawdzenie czy menel okradl na tyle ze jest koniec gry
                         {
@@ -473,9 +473,9 @@ public class Main {
                                 for (org.example.Policjant policjant : Policjant)
                                     Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
                                 Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-                       //         System.out.println("Przed podniesieniem pieniadza przez menela");
-         //                       Wyswietlanie_Tablicy(Rozmiar);
-                       //         System.out.println();
+//                                System.out.println("Przed podniesieniem pieniadza przez menela");
+//                                Wyswietlanie_Tablicy(Rozmiar);
+//                                System.out.println();
                                 Reset(Rozmiar);
 
                                 pieniadze[i] = null;
@@ -508,9 +508,9 @@ public class Main {
                                 for (org.example.Policjant policjant : Policjant)
                                     Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
                                 Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-                           //     System.out.println("Przed podniesieniem pieniadza przez menela");
-       //                         Wyswietlanie_Tablicy(Rozmiar);
-                           //     System.out.println();
+//                                System.out.println("Przed podniesieniem pieniadza przez menela");
+//                                Wyswietlanie_Tablicy(Rozmiar);
+//                                System.out.println();
                                 Reset(Rozmiar);
 
                                 pieniadze[i] = null;
@@ -548,9 +548,9 @@ public class Main {
                             for (org.example.Policjant policjant : Policjant)
                                 Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
                             Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-                         //   System.out.println("Przed aresztowaniem Dresa przed ruchem policjanta pierwszy ruch");
-      //                      Wyswietlanie_Tablicy(Rozmiar);
-                         //   System.out.println();
+//                            System.out.println("Przed aresztowaniem Dresa przed ruchem policjanta pierwszy ruch");
+//                            Wyswietlanie_Tablicy(Rozmiar);
+//                            System.out.println();
                             Reset(Rozmiar);
 
                             dresy[i] = null;
@@ -576,9 +576,9 @@ public class Main {
                             for (org.example.Policjant policjant : Policjant)
                                 Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
                             Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-                         //   System.out.println("Przed aresztowaniem Menela przed ruchem policjanta pierwszy ruch");
-       //                     Wyswietlanie_Tablicy(Rozmiar);
-                        //    System.out.println();
+//                            System.out.println("Przed aresztowaniem Menela przed ruchem policjanta pierwszy ruch");
+//                            Wyswietlanie_Tablicy(Rozmiar);
+//                            System.out.println();
                             Reset(Rozmiar);
 
                             menele[i] = null;
@@ -638,9 +638,9 @@ public class Main {
                                     Dodawanie(Policjant[j].GimmeType(), Policjant[j].Gimmex(), Policjant[j].Gimmey());
                             Dodawanie(Policjant[p].GimmeType(), pomoc1, pomoc2);
                             Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-                         //   System.out.println("Przed aresztowaniem Menela przed ruchem policjanta");
-                         //   Wyswietlanie_Tablicy(Rozmiar);
-                         //   System.out.println();
+//                            System.out.println("Przed aresztowaniem Menela przed ruchem policjanta");
+//                            Wyswietlanie_Tablicy(Rozmiar);
+//                            System.out.println();
                             Reset(Rozmiar);
 
                             Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
@@ -656,9 +656,9 @@ public class Main {
                             for (org.example.Policjant policjant : Policjant)
                                 Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
                             Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-                       //     System.out.println("Przed aresztowaniem Menela po ruchu policjanta");
-                      //      Wyswietlanie_Tablicy(Rozmiar);
-                       //     System.out.println();
+//                            System.out.println("Przed aresztowaniem Menela po ruchu policjanta");
+//                            Wyswietlanie_Tablicy(Rozmiar);
+//                            System.out.println();
                             Reset(Rozmiar);
 
                             menele[liczbamenel] = null;
@@ -703,9 +703,9 @@ public class Main {
                                     Dodawanie(Policjant[j].GimmeType(), Policjant[j].Gimmex(), Policjant[j].Gimmey());
                             Dodawanie(Policjant[p].GimmeType(), pomoc1, pomoc2);
                             Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-                         //   System.out.println("Przed aresztowaniem Dresa przed ruchem policjanta");
-  //                          Wyswietlanie_Tablicy(Rozmiar);
-                         //   System.out.println();
+//                            System.out.println("Przed aresztowaniem Dresa przed ruchem policjanta");
+//                            Wyswietlanie_Tablicy(Rozmiar);
+//                            System.out.println();
                             Reset(Rozmiar);
 
 
@@ -722,9 +722,9 @@ public class Main {
                             for (org.example.Policjant policjant : Policjant)
                                 Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
                             Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
-                         //   System.out.println("Przed aresztowaniem Dresa po ruchu policjanta");
-                         //   Wyswietlanie_Tablicy(Rozmiar);
-                         //   System.out.println();
+//                            System.out.println("Przed aresztowaniem Dresa po ruchu policjanta");
+//                            Wyswietlanie_Tablicy(Rozmiar);
+//                            System.out.println();
                             Reset(Rozmiar);
 
                             dresy[liczbadres] = null;
