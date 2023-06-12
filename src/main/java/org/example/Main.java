@@ -1,10 +1,11 @@
 package org.example;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.FileSystemException;
 import java.util.Random;
 
 
 public class Main {
-
 
     // Tablica stringow potrzebna do wizualizacji
     static String[][] Pozycje = new String[50][50];
@@ -65,7 +66,11 @@ public class Main {
 //        return liczba;
 //    }
 
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) throws InterruptedException, IOException {
+
+        //Potrzebne metody do stworzenia pliku i zapisywania do niego wynikow symulacji
+        Writer plik = new FileWriter("wyniki.txt", true );
+        BufferedWriter zapis = new BufferedWriter(plik);
 
         Random Losowy = new Random();
         //inicjalizacja rozmiaru planszy
@@ -128,17 +133,18 @@ public class Main {
         System.out.println("Mapa wyglada tak:");
         Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
         for (Menel menel : menele)
-                Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
+            Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
         for (Dres dres : dresy)
-                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
+            Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
         for (Pieniadze value : pieniadze)
-                Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
+            Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
         for (org.example.Policjant policjant : Policjant)
             Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
         Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
         Wyswietlanie_Tablicy(Rozmiar);
         System.out.println();
         Reset(Rozmiar);
+
         while (true) {
 
             Ilosc_Ruchow++;
@@ -208,11 +214,11 @@ public class Main {
                     if(pieniadze[i] != null && Marek.Czy_widzi_pieniadze(pieniadze[i].pozycja_x,pieniadze[i].pozycja_y) == 1)
                     {
                         tymcz_odlegl = (pieniadze[i].pozycja_x - Marek.pozycja_x)*(pieniadze[i].pozycja_x - Marek.pozycja_x) + (pieniadze[i].pozycja_y - Marek.pozycja_y)*(pieniadze[i].pozycja_y - Marek.pozycja_y);
-                            if(tymcz_odlegl < odleglosc)
-                            {
-                                odleglosc = tymcz_odlegl;
-                                liczba = i;
-                            }
+                        if(tymcz_odlegl < odleglosc)
+                        {
+                            odleglosc = tymcz_odlegl;
+                            liczba = i;
+                        }
                     }
                 }
                 if(liczba != -1)
@@ -679,7 +685,7 @@ public class Main {
                 }
             }
 
-                //dodawanie poszczegolnych elementow do tablicy wyswietlajacej
+            //dodawanie poszczegolnych elementow do tablicy wyswietlajacej
             Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
             for (Menel menel : menele)
                 if (menel != null)
@@ -695,19 +701,20 @@ public class Main {
             Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
 
             if( Akcja > 0)
-                {
-                    System.out.println("Tura numer -> " + Ilosc_Ruchow);
-                    System.out.println("Typ akcji: " + Typ_Akcji);
-                    Wyswietlanie_Tablicy(Rozmiar);
-                    System.out.println();
-                    System.out.println();
-                }
-                Akcja = 0;
-                Typ_Akcji = "";
-                Reset(Rozmiar);
-                if(Ktory == 1 || Ktory == 2)
-                    break;
+            {
+                System.out.println("Tura numer -> " + Ilosc_Ruchow);
+                System.out.println("Typ akcji: " + Typ_Akcji);
+                Wyswietlanie_Tablicy(Rozmiar);
+                System.out.println();
+                System.out.println();
+            }
+            Akcja = 0;
+            Typ_Akcji = "";
+            Reset(Rozmiar);
+            if(Ktory == 1 || Ktory == 2)
+                break;
         }
+
 
         Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
         for (Menel menel : menele)
@@ -732,12 +739,21 @@ public class Main {
             System.out.println();
         }
 
-                if (Ktory == 1)
-                    System.out.println("zebranie klucza");
-                else if(Ktory == 2)
-                    System.out.println("aresztowanie wszystkich meneli i dresow");
-                else
-                    System.out.println("okradzenie");
-                System.out.println("koniecgry,    ilosc ruchow -> " + Ilosc_Ruchow);
+        if (Ktory == 1) {
+            System.out.println("zebranie klucza");
+            //Zapis w postaci : 1. Typ zakonczenia gry, 2. Ilosc ruchow, 3. Ilosc posiadanych pieniedzy
+            zapis.write("1" + " " +  Ilosc_Ruchow + " " + Marek.ilosc_pieniedzy + "\n");
         }
+        else if(Ktory == 2) {
+            System.out.println("aresztowanie wszystkich meneli i dresow");
+            zapis.write("2" + " " + Ilosc_Ruchow + " " + Marek.ilosc_pieniedzy + "\n");
+        }
+        else {
+            System.out.println("okradzenie");
+            zapis.write("3" + " " + Ilosc_Ruchow + " 0" + "\n");
+            //huh
+        }
+        System.out.println("koniecgry,    ilosc ruchow -> " + Ilosc_Ruchow);
+        zapis.close();
     }
+}
