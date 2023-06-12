@@ -10,7 +10,6 @@ public class Main {
     // Tablica stringow potrzebna do wizualizacji
     static String[][] Pozycje = new String[50][50];
 
-
     // Kolorki :}
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -46,16 +45,17 @@ public class Main {
     }
 
     // metoda wyswietlajaca tablice wizualizacyjna
-    public static void Wyswietlanie_Tablicy(int rozmiar)
-    {
+    public static void Wyswietlanie_Tablicy(int rozmiar) throws InterruptedException {
         for( int i = 0; i < rozmiar; i++)
         {
             for( int j = 0; j < rozmiar; j++)
             {
                 System.out.print(Pozycje[i][j]);
+                //Thread.sleep(0,1);
             }
             System.out.println();
         }
+        Thread.sleep(1000);
     }
 
 //    public static int atoi(String wejscie)
@@ -66,11 +66,11 @@ public class Main {
 //        return liczba;
 //    }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws InterruptedException, IOException {
+
         //Potrzebne metody do stworzenia pliku i zapisywania do niego wynikow symulacji
         Writer plik = new FileWriter("wyniki.txt", true );
         BufferedWriter zapis = new BufferedWriter(plik);
-
 
         Random Losowy = new Random();
         //inicjalizacja rozmiaru planszy
@@ -106,7 +106,9 @@ public class Main {
         Klucz Klucz = new Klucz(Losowy.nextInt(Rozmiar), Losowy.nextInt(Rozmiar));
 
         //implementacja policjanta
-        Policjant Policjant = new Policjant(Losowy.nextInt(Rozmiar), Losowy.nextInt(Rozmiar), 2);
+        Policjant[] Policjant = new Policjant[5];
+        for(int i = 0; i < Policjant.length;i++)
+            Policjant[i] = new Policjant(Losowy.nextInt(Rozmiar),Losowy.nextInt(Rozmiar),2);
 
         //element zliczający ile ruchów trwała gra
         int Ilosc_Ruchow = 0;
@@ -131,12 +133,13 @@ public class Main {
         System.out.println("Mapa wyglada tak:");
         Dodawanie(Marek.GimmeType(), Marek.Gimmex(), Marek.Gimmey());
         for (Menel menel : menele)
-                Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
+            Dodawanie(menel.GimmeType(), menel.Gimmex(), menel.Gimmey());
         for (Dres dres : dresy)
-                Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
+            Dodawanie(dres.GimmeType(), dres.Gimmex(), dres.Gimmey());
         for (Pieniadze value : pieniadze)
-                Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
+            Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
+        for (org.example.Policjant policjant : Policjant)
+            Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
         Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
         Wyswietlanie_Tablicy(Rozmiar);
         System.out.println();
@@ -723,7 +726,8 @@ public class Main {
         for (Pieniadze value : pieniadze)
             if (value != null)
                 Dodawanie(value.GimmeType(), value.Gimmex(), value.Gimmey());
-        Dodawanie(Policjant.GimmeType(), Policjant.Gimmex(), Policjant.Gimmey());
+        for (org.example.Policjant policjant : Policjant)
+            Dodawanie(policjant.GimmeType(), policjant.Gimmex(), policjant.Gimmey());
         if(Klucz != null)
             Dodawanie(Klucz.GimmeType(), Klucz.Gimmex(), Klucz.Gimmey());
 
