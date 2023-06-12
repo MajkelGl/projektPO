@@ -116,6 +116,9 @@ public class Main {
         //uzależnienie jak się gra skończyła 2 -> aresztowanie wszystkich meneli i dresow 1 -> zebranie klucza  0 -> okradzenie ze wszystkich pieniędzy
         int Ktory = 0;
 
+        //zliczanie ile razy okradli dresy/menele -> do wykresow
+        int Ile_kradziezy = 0;
+
         //puszczenie losowania do kradzieży
         int Kradziez;
 
@@ -260,13 +263,14 @@ public class Main {
                     Marek.Poruszanie_sie(Rozmiar);
             }
 
-
+            //ruch dresow
             for(int i = 0; i < dresy.length;i++)
             {
                 if(dresy[i] != null)
                 {
-                    if(dresy[i].Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)
+                    if(dresy[i].Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)//dla pierwszego ruchu jezeli dres stoi kolo glownego bohatera
                     {
+                        Ile_kradziezy++;
                         Akcja++;
                         Typ_Akcji += "\nKradziez przez Dresa";
                         Kradziez = Losowy.nextInt(dresy[i].max_pieniedzy - dresy[i].min_pieniedzy + 1) + dresy[i].min_pieniedzy;//losowanie z przedzialu liczby ile kradnie dres
@@ -308,6 +312,7 @@ public class Main {
                         dresy[i].wstrone(Marek.pozycja_x, Marek.pozycja_y);
                         if(dresy[i].Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)
                         {
+                            Ile_kradziezy++;
                             Akcja++;
                             Typ_Akcji += "\nKradziez przez Dresa";
                             Kradziez = Losowy.nextInt(dresy[i].max_pieniedzy - dresy[i].min_pieniedzy + 1) + dresy[i].min_pieniedzy;//losowanie z przedzialu liczby ile kradnie dres
@@ -361,6 +366,7 @@ public class Main {
                 {
                     if(menele[j].Czy_moze_okrasc(Marek.pozycja_x, Marek.pozycja_y) == 1)
                     {
+                        Ile_kradziezy++;
                         Akcja++;
                         Kradziez = Losowy.nextInt(menele[j].max_pieniedzy - menele[j].min_pieniedzy + 1) + menele[j].min_pieniedzy;//losowanie z przedzialu liczby ile kradnie menel
                         Marek.ilosc_pieniedzy -= Kradziez;//kradziez menela
@@ -741,16 +747,16 @@ public class Main {
 
         if (Ktory == 1) {
             System.out.println("zebranie klucza");
-            //Zapis w postaci : 1. Typ zakonczenia gry, 2. Ilosc ruchow, 3. Ilosc posiadanych pieniedzy
-            zapis.write("1" + " " +  Ilosc_Ruchow + " " + Marek.ilosc_pieniedzy + "\n");
+            //Zapis w postaci : 1. Typ zakonczenia gry, 2. Ilosc ruchow, 3. Ilosc posiadanych pieniedzy 4. Ile kradziezy
+            zapis.write("1" + " " +  Ilosc_Ruchow + " " + Marek.ilosc_pieniedzy + " " + Ile_kradziezy + "\n");
         }
         else if(Ktory == 2) {
             System.out.println("aresztowanie wszystkich meneli i dresow");
-            zapis.write("2" + " " + Ilosc_Ruchow + " " + Marek.ilosc_pieniedzy + "\n");
+            zapis.write("2" + " " + Ilosc_Ruchow + " " + Marek.ilosc_pieniedzy + " " + Ile_kradziezy + "\n");
         }
         else {
             System.out.println("okradzenie");
-            zapis.write("3" + " " + Ilosc_Ruchow + " 0" + "\n");
+            zapis.write("3" + " " + Ilosc_Ruchow + " 0" + Ile_kradziezy + "\n");
             //huh
         }
         System.out.println("koniecgry,    ilosc ruchow -> " + Ilosc_Ruchow);
